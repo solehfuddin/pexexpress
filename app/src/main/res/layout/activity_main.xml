@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pex.pex_courier.ui.HomeActivity"
+    android:orientation="vertical"
+    android:background="@color/colorGrey"
+    >
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       tools:ignore="ScrollViewSize">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="250dp"
+       android:background="@drawable/card_login"
+       >
+
+      <ImageView
+          android:src="@drawable/pexpres_putih"
+          android:layout_marginStart="@dimen/margin_activity"
+          android:layout_marginEnd="@dimen/margin_activity"
+          android:id="@+id/imageView"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          app:layout_constraintBottom_toTopOf="@+id/textView"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:textStyle="bold"
+          android:id="@+id/textView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="@dimen/margin_activity"
+          android:text="@string/login"
+          android:textColor="@color/colorWhite"
+          android:textSize="26sp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:layout_marginBottom="@dimen/margin_activity"
+          />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+   <EditText
+       android:layout_marginTop="40dp"
+       android:layout_marginStart="@dimen/margin_activity"
+       android:layout_marginEnd="@dimen/margin_activity"
+       android:layout_width="match_parent"
+       android:layout_height="45dp"
+       android:background="@drawable/card_input"
+       android:drawableStart="@drawable/ic_baseline_email_24"
+       android:paddingStart="@dimen/margin_activity"
+       tools:ignore="RtlSymmetry"
+       android:id="@+id/edt_email"
+       android:hint="@string/email"
+       android:drawablePadding="10dp"
+       android:inputType="textEmailAddress"
+       />
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="45dp"
+          android:layout_marginTop="@dimen/margin_activity"
+          android:layout_marginBottom="@dimen/margin_activity"
+          android:layout_marginStart="@dimen/margin_activity"
+          android:layout_marginEnd="@dimen/margin_activity"
+          android:background="@drawable/card_input"
+          >
+
+         <EditText
+             android:id="@+id/edt_password"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toStartOf="@+id/seePassword"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             android:background="@color/colorTransparent"
+             android:drawableStart="@drawable/ic_baseline_vpn_key_24"
+             android:inputType="textPassword"
+             android:paddingStart="@dimen/margin_activity"
+             android:hint="@string/password"
+             android:drawablePadding="10dp"
+             tools:ignore="RtlSymmetry" />
+
+         <ImageView
+             android:id="@+id/seePassword"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/ic_baseline_remove_red_eye_24"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             android:layout_marginEnd="10dp"/>
+
+         <ImageView
+             android:visibility="gone"
+             android:id="@+id/hidePassword"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginEnd="10dp"
+             android:src="@drawable/ic_baseline_remove_orange_eye_24"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toTopOf="parent" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--   <EditText-->
+<!--       android:id="@+id/edt_password"-->
+<!--       android:layout_width="match_parent"-->
+<!--       android:layout_height="45dp"-->
+<!--       android:layout_marginStart="@dimen/margin_activity"-->
+<!--       android:layout_marginTop="@dimen/margin_activity"-->
+<!--       android:layout_marginEnd="@dimen/margin_activity"-->
+<!--       android:background="@drawable/card_input"-->
+<!--       android:drawableStart="@drawable/ic_baseline_vpn_key_24"-->
+<!--       android:paddingStart="@dimen/margin_activity"-->
+<!--       tools:ignore="RtlSymmetry"-->
+<!--       android:hint="@string/password"-->
+<!--       android:drawablePadding="10dp"-->
+<!--       android:inputType="textPassword"-->
+<!--       android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"-->
+<!--       android:paddingEnd="10dp"-->
+<!--       />-->
+
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="end"
+       android:layout_marginEnd="@dimen/margin_activity"
+       android:text="@string/forgot_password"
+       android:layout_marginTop="@dimen/margin_activity"
+       android:id="@+id/btn_forget"
+      />
+
+   <com.google.android.material.button.MaterialButton
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/card_button"
+       android:layout_marginStart="@dimen/margin_activity"
+       android:layout_marginTop="@dimen/margin_activity"
+       android:text="@string/login"
+       app:backgroundTint="@color/colorPrimary"
+       android:layout_marginEnd="@dimen/margin_activity"
+       android:id="@+id/btn_login"
+       android:layout_marginBottom="@dimen/margin_activity"
+       />
+
+   </LinearLayout>
+
+</ScrollView>
+
+

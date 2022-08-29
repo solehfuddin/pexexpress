@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.pex.pex_courier">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PEX_Courier"
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="n"
+        android:dataExtractionRules="@xml/data_extraction_rules">
+        <activity
+            android:name=".ui.delivery.DetailPendingDeliveryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.delivery.DetailBackToSenderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.delivery.DetailFinishDeliveryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pick_up.DetailCancelPickupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.delivery.DetailRequestDeliveryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.QRScannerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pick_up.DetailPickUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.forget_pass.NewPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.forget_pass.SendOtpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.forget_pass.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.users.ChangeProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.users.ChangPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pick_up.DetaiRequestlPickUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.users.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.HomeActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>

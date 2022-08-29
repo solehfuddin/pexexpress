@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.users.ChangeProfileActivity"
+    android:orientation="vertical"
+    >
+
+
+        <include
+            android:id="@+id/include3"
+            layout="@layout/app_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/imageView14"
+                            android:layout_width="250dp"
+                            android:layout_height="200dp"
+                            android:src="@drawable/ic_undraw_profile_re_4a55"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include3"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            android:layout_marginTop="@dimen/margin_activity"
+                            android:text="Change Your Profile"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="First Name"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            app:layout_constraintStart_toStartOf="@+id/textView14"
+                            app:layout_constraintTop_toBottomOf="@+id/textView14"
+                            android:layout_marginTop="@dimen/margin_activity"
+                            tools:ignore="HardcodedText" />
+
+                        <EditText
+                            android:paddingStart="10dp"
+                            android:inputType="text"
+                            android:id="@+id/edt_first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:layout_marginEnd="@dimen/margin_activity"
+                            android:background="@drawable/card_spinner"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView14"
+                            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="@string/last_name"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            app:layout_constraintStart_toStartOf="@+id/textView15" />
+
+                        <EditText
+
+                            android:paddingStart="10dp"
+                            android:id="@+id/edt_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/card_spinner"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView16"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            android:layout_marginEnd="@dimen/margin_activity"
+                            app:layout_constraintTop_toBottomOf="@+id/textView16"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:inputType="text"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="@string/phone"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            app:layout_constraintStart_toStartOf="@+id/textView16"
+                            app:layout_constraintTop_toBottomOf="@+id/edt_new_password" />
+
+                        <EditText
+                            android:paddingStart="10dp"
+                            android:id="@+id/edt_phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/card_spinner"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView17"
+                            app:layout_constraintTop_toBottomOf="@+id/textView17"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            android:layout_marginEnd="@dimen/margin_activity"
+                            android:layout_marginTop="@dimen/margin_small"
+                            />
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:text="@string/address"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            app:layout_constraintStart_toStartOf="@+id/textView16"
+                            app:layout_constraintTop_toBottomOf="@+id/edt_new_password" />
+
+                        <EditText
+                            android:id="@+id/edt_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:paddingStart="10dp"
+                            android:paddingTop="10dp"
+                            android:background="@drawable/card_spinner"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView17"
+                            app:layout_constraintTop_toBottomOf="@+id/textView17"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            android:layout_marginEnd="@dimen/margin_activity"
+                            android:layout_marginTop="@dimen/margin_small"
+                            android:gravity="top"
+                            android:inputType="textMultiLine"
+                            android:lines="5"
+                            android:singleLine="false"
+                            />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_submit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_activity"
+                            android:layout_marginTop="@dimen/margin_activity"
+                            android:layout_marginEnd="@dimen/margin_activity"
+                            android:background="@drawable/card_button_outline"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginBottom="@dimen/margin_small"
+                            app:layout_constraintTop_toBottomOf="@+id/edt_confirm_password"
+                            android:text="@string/set_profile"
+                            android:textColor="@color/colorPrimary"
+                            />
+                </LinearLayout>
+
+
+
+        </androidx.core.widget.NestedScrollView>
+</LinearLayout>

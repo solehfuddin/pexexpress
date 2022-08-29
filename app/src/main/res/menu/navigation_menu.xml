@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/nav_pick_up"
+        android:icon="@drawable/ic_baseline_electric_moped_24"
+        android:title="@string/pick_up" />
+    <item
+        android:id="@+id/nav_transit"
+        android:icon="@drawable/ic_baseline_input_24"
+        android:title="@string/transit" />
+    <item
+        android:id="@+id/nav_forward"
+        android:icon="@drawable/ic_baseline_transform_24"
+        android:title="@string/forward" />
+    <item
+        android:id="@+id/nav_delivery"
+        android:icon="@drawable/ic_all_inbox_black_24dp"
+        android:title="@string/delivery" />
+</menu>

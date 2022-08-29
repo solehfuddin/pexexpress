@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.users.ChangPasswordActivity"
+    android:fitsSystemWindows="true"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <include
+            android:id="@+id/include3"
+            layout="@layout/app_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_undraw_forgot_password_re_hxwm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include3"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_activity"
+            android:text="@string/kode_verifikasi"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kode verifikasi telah dikirim melalui WhatsApp"
+            android:layout_marginStart="@dimen/margin_activity"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14"
+            android:layout_marginTop="@dimen/margin_activity"
+            tools:ignore="HardcodedText" />
+
+        <EditText
+            android:inputType="phone"
+            android:id="@+id/edtOTP"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:text=""
+            android:letterSpacing="0.3"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:background="@drawable/card_spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            tools:ignore="HardcodedText,TextFields" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_activity"
+            android:layout_marginTop="@dimen/margin_activity"
+            android:layout_marginEnd="@dimen/margin_activity"
+            android:background="@drawable/card_button_outline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:text="@string/send_otp"
+            android:id="@+id/sendOTP"
+            android:textColor="@color/colorPrimary"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/timer"
+                />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_tidak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tidak_menerima_kode"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/btn_kirim_ulang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kirim_ulang"
+                android:layout_marginStart="5dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                />
+
+        </LinearLayout>
+<!--        <Chronometer-->
+<!--            android:id="@+id/view_timer"-->
+<!--            tools:targetApi="24"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+    </LinearLayout>
+</ScrollView>

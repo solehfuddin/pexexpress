@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/margin_activity"
+    >
+
+    <TextView
+
+        android:textAlignment="center"
+        android:id="@+id/tv_text_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_activity"
+        android:text="Anda yakin ingin membatalkan pengiriman?"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_activity"
+        app:layout_constraintStart_toStartOf="@+id/tv_text_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text_dialog"
+        android:layout_marginStart="50dp"
+        android:text="Iya"
+        android:background="@drawable/bg_doc"
+        app:backgroundTint="@null"
+        android:textColor="@color/colorPrimary"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_not_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_activity"
+        app:layout_constraintEnd_toEndOf="@+id/tv_text_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/tv_text_dialog"
+        android:layout_marginEnd="50dp"
+        android:text="Tidak"
+        android:background="@drawable/btn_logout"
+        app:backgroundTint="@null"
+        android:textColor="@color/coloRed"
+        tools:ignore="HardcodedText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

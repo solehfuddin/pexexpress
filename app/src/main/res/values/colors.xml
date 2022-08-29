@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+
+    <color name="colorPrimary">#F6B21B</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorWhite">#FFF</color>
+    <color name="colorGrey">#F8F8F8</color>
+    <color name="coloRed">#E80A0A</color>
+    <color name="colorTransparent">#00F8F8F8</color>
+    <string-array name="pieColors">
+        <item>#f55a42</item>
+        <item>#AA16D3</item>
+        <item>#2CFF8B</item>
+        <item>#2196F3</item>
+        <item>#FFEB3B</item>
+        <item>#d8e84d</item>
+        <item>#B594FF</item>
+        <item>#6fe84d</item>
+        <item>#EF5CFF</item>
+        <item>#FF9800</item>
+    </string-array>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:layout_marginTop="@dimen/margin_activity"
+        android:id="@+id/tv_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_password"
+        android:layout_marginHorizontal="@dimen/margin_activity"
+        app:layout_constraintStart_toStartOf="@+id/edt_phone"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:paddingStart="@dimen/margin_small"
+        android:id="@+id/edt_input"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/margin_activity"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_activity"
+        android:background="@drawable/card_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        tools:ignore="TextFields" />
+
+
+</LinearLayout>
