@@ -120,6 +120,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_sender" />
 
+        <TextView
+            android:id="@+id/tv_patokan_sender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:letterSpacing="0.05"
+            android:text="@string/alamat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_address_sender" />
+
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="30dp"
@@ -128,7 +141,7 @@
             android:layout_marginTop="@dimen/margin_activity"
             android:src="@drawable/location"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_address_sender" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_patokan_sender" />
 
         <ImageView
             android:layout_width="2dp"
@@ -184,6 +197,20 @@
             android:layout_marginEnd="@dimen/margin_small"
             android:layout_marginStart="62dp"
             android:layout_marginTop="@dimen/margin_small"
+            android:letterSpacing="0.05"
+            />
+
+        <TextView
+            android:id="@+id/tv_patokan_receiver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alamat"
+            app:layout_constraintEnd_toEndOf="@+id/textView12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_address_receiver"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="10dp"
             android:letterSpacing="0.05"
             android:paddingBottom="@dimen/margin_small"
             />

@@ -46,6 +46,7 @@ import me.echodev.resizer.Resizer
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.w3c.dom.Text
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.DecimalFormat
@@ -98,6 +99,7 @@ class DetaiRequestlPickUpActivity : AppCompatActivity(), ImagePickerBottomsheet.
     lateinit var finalFile : File
 
     private lateinit var imagePicker: ImagePickerActivityClass
+    var isFirst : Boolean = false
 
     @SuppressLint("SetTextI18n", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -149,13 +151,15 @@ class DetaiRequestlPickUpActivity : AppCompatActivity(), ImagePickerBottomsheet.
         val formatter: NumberFormat = DecimalFormat("#,###")
         val myNumber = data?.biaya?.toInt()
         val formattedNumber: String = formatter.format(myNumber)
+        Log.d("Biaya : ", data?.biaya.toString())
+//        isFirst = true
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"
         tvTime.text = data?.jampenugasanpickup.toString()
         tvDate.text = data?.tanggalpenugasanpickup.toString()
         tvResi.text = data?.nomortracking.toString()
         tvPengirim.text = data?.namapengirim.toString()
-        jenisUkuran = data?.jenisukuran+" = "+data?.maksimalberat
+        jenisUkuran = data?.jenisukuran+" = "+data?.maksimalberat+ " Kg"
         edtTipePengiriman.isEnabled = false
         edtTipePengiriman.setText(data?.namaJenisPembayaran.toString())
         edtJarakTempuh.isEnabled = false
@@ -202,7 +206,7 @@ class DetaiRequestlPickUpActivity : AppCompatActivity(), ImagePickerBottomsheet.
             if(res.success == true){
                 res.data.forEach{
                     dataUkuran.add(it.jenisukuran+" = "+it.maksimalberat+" Kg")
-                    val ukuranModel : UkuranModel = UkuranModel(it.id,it.jenisukuran.toString(),it.maksimalpanjang.toString(),it.maksimallebar.toString(),it.maksimaltinggi.toString(),it.maksimallebar.toString(), it.tarif)
+                    val ukuranModel  = UkuranModel(it.id,it.jenisukuran.toString(),it.maksimalpanjang.toString(),it.maksimallebar.toString(),it.maksimaltinggi.toString(),it.maksimallebar.toString(), it.tarif)
                     listUkuran.add(ukuranModel)
                     val adapter: ArrayAdapter<String> =
                         ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataUkuran)
@@ -226,7 +230,9 @@ class DetaiRequestlPickUpActivity : AppCompatActivity(), ImagePickerBottomsheet.
                                 tvTarif.text = "Rp $formattedNumber"
                             }
 
-                            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+                            override fun onNothingSelected(adapterView: AdapterView<*>?) {
+
+                            }
                         }
                 }
             }

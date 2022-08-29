@@ -33,10 +33,14 @@ class RecyclerViewAdapter(val context : Context,val activity: Activity): Recycle
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = listData[position]
+        val patokanPengirim = "Patokan : " + data.alamatpengirim
+        val patokanPenerima = "Patokan : " + data.alamatpenerima
         holder.tvReceiver!!.text = data.namapenerima
         holder.tvSender.text = data.namapengirim
         holder.tvAddressSender.text = data.gkecamatanpengirim
+        holder.tvPatokanSender.text = patokanPengirim
         holder.tvAddressReceiver.text = data.gkecamatanpenerima
+        holder.tvPatokanReceiver.text = patokanPenerima
         holder.tvResi.text = data.nomortracking
         holder.tvDate.text = data.tanggalpenugasanpickup
 
@@ -91,7 +95,9 @@ class RecyclerViewAdapter(val context : Context,val activity: Activity): Recycle
         val tvSender : TextView = itemView!!.findViewById(R.id.tv_sender)
         val tvResi : TextView = itemView!!.findViewById(R.id.tv_time)
         val tvAddressReceiver : TextView = itemView!!.findViewById(R.id.tv_address_receiver)
+        val tvPatokanReceiver : TextView = itemView!!.findViewById(R.id.tv_patokan_receiver)
         val tvAddressSender : TextView = itemView!!.findViewById(R.id.tv_address_sender)
+        val tvPatokanSender : TextView = itemView!!.findViewById(R.id.tv_patokan_sender)
         val tvDate : TextView = itemView!!.findViewById(R.id.tv_date)
         val cardView : CardView = itemView!!.findViewById(R.id.card_view)
         val btnWaSender : ImageView = itemView!!.findViewById(R.id.btnWaSender)

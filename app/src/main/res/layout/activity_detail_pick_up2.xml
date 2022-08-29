@@ -159,6 +159,7 @@
             android:layout_height="35dp"
             android:layout_marginTop="@dimen/margin_activity"
             android:src="@drawable/dollar"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/imageView9"
             app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
@@ -171,6 +172,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/imageView12"
             app:layout_constraintStart_toEndOf="@+id/imageView12"
             app:layout_constraintTop_toTopOf="@+id/imageView12"
