@@ -15,7 +15,7 @@ import com.pex.pex_courier.dto.order.OrderDTO
 object Helper {
     // Server PROD
     var ApiURL = "https://pex.pexpress.my.id/public/index.php/api/"
-    var imageURL = "https://pex.pexpress.my.id/public/index.php/api/uploads/"
+    var imageURL = "https://pex.pexpress.my.id/public/uploads/"
     // Server DEV
     //var ApiURL = "https://0409-180-250-96-155.ngrok.io/pex.pexpress.my.id/public/index.php/api/"
     //var imageURL = "https://0409-180-250-96-155.ngrok.io/pex.pexpress.my.id/public/uploads/"
