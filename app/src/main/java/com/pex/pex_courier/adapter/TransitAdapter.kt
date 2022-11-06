@@ -7,20 +7,16 @@ import com.pex.pex_courier.ui.transit.AfterRequestTransit
 import com.pex.pex_courier.ui.transit.InTransitFragment
 import com.pex.pex_courier.ui.transit.RequestTransitFragment
 
+@Suppress("DEPRECATION")
 class TransitAdapter(fm:FragmentManager):FragmentPagerAdapter(fm) {
     private val pages = listOf(
         RequestTransitFragment(),
         AfterRequestTransit(),
-        InTransitFragment()
+        InTransitFragment(),
     )
 
-    // menentukan fragment yang akan dibuka pada posisi tertentu
-    override fun getItem(position: Int): Fragment {
-        return pages[position]
-    }
-
     override fun getCount(): Int {
-        return pages.size
+       return pages.size
     }
 
     // judul untuk tabs
@@ -31,5 +27,9 @@ class TransitAdapter(fm:FragmentManager):FragmentPagerAdapter(fm) {
             2 -> "In Transit"
             else -> "Request"
         }
+    }
+
+    override fun getItem(position: Int): Fragment {
+        return pages[position] as Fragment
     }
 }

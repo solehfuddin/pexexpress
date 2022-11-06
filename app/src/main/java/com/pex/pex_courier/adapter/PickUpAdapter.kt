@@ -1,5 +1,6 @@
 package com.pex.pex_courier.adapter
 
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -7,13 +8,14 @@ import com.pex.pex_courier.ui.pick_up.CancelForPickupFragment
 import com.pex.pex_courier.ui.pick_up.PUFragment
 import com.pex.pex_courier.ui.pick_up.PickUpRequestFragment
 
-class PickUpAdapter(fm:FragmentManager): FragmentPagerAdapter(fm) {
+@Suppress("DEPRECATION")
+class PickUpAdapter(fm: FragmentManager,) :
+    FragmentPagerAdapter(fm) {
 
     private val pages = listOf(
         PickUpRequestFragment(),
         PUFragment(),
-        CancelForPickupFragment()
-
+        CancelForPickupFragment(),
     )
 
     // menentukan fragment yang akan dibuka pada posisi tertentu

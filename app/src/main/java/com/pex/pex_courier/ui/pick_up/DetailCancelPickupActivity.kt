@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.pex.pex_courier.R
 import com.pex.pex_courier.dto.order.OrderDTO
-import org.w3c.dom.Text
+import com.pex.pex_courier.helper.ForceCloseHandler
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
@@ -22,9 +22,6 @@ class DetailCancelPickupActivity : AppCompatActivity() {
     private lateinit var nameTitle : TextView
     private lateinit var btnSetting : ImageView
     private lateinit var inputLen : View
-    private lateinit var inputWidth : View
-    private lateinit var inputHeight : View
-    private lateinit var inputWeight : View
     private lateinit var tvLayanan : TextView
     private lateinit var tvTime : TextView
     private lateinit var tvTarif : TextView
@@ -38,6 +35,8 @@ class DetailCancelPickupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_cancel_pickup)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         helloTitle = findViewById(R.id.tv_hello_title)
         nameTitle = findViewById(R.id.tv_name_title)
         btnSetting = findViewById(R.id.btn_setting)

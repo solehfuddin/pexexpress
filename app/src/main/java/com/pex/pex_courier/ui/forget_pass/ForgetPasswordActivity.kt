@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.pex.pex_courier.R
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.model.RequestOTPModel
 import com.pex.pex_courier.network.api.ApiInterface
 import com.pex.pex_courier.repository.AuthRepository
@@ -31,6 +32,8 @@ class ForgetPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forget_password)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         helloTitle = findViewById(R.id.tv_hello_title)
         nameTitle = findViewById(R.id.tv_name_title)
         btnSetting = findViewById(R.id.btn_setting)

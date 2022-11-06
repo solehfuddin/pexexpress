@@ -1,6 +1,7 @@
 package com.pex.pex_courier.network.api
 
 import com.pex.pex_courier.dto.GlobalResponse
+import com.pex.pex_courier.dto.asuransi.AsuransiResponse
 import com.pex.pex_courier.dto.dashboard.DashboardDTO
 import com.pex.pex_courier.dto.forgetpassword.CheckOTPDTO
 import com.pex.pex_courier.dto.login.LoginDTO
@@ -34,8 +35,14 @@ interface ApiInterface {
     @GET("courier/order")
     fun dataOrder(@Header("Authorization") token:String,@Query("status") status:Int,@Query("limit") limit:Int) : Call<OrderResponse>
 
+    @GET("courier/order-new")
+    fun dataOrderNew(@Header("Authorization") token:String,@Query("status") status:Int,@Query("limit") limit:Int, @Query("offset") offset:Int) : Call<OrderResponse>
+
     @GET("courier/profile")
     fun dataProfile(@Header("Authorization")token:String):Call<ResponseProfile>
+
+    @POST("courier/logger")
+    fun sendLog(@Header("Authorization")token:String, @Field("message") message:String) : Call<GlobalResponse>
 
     @FormUrlEncoded
     @POST("courier/change-password")
@@ -72,17 +79,20 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @PUT("courier/order/update-status/{id}")
-    fun cancelOrder(@Header("Authorization")token: String,@Field("statuspengiriman")status: String,@Path("id")id:String,@Query("type") type:String):Call<GlobalResponse>
+    fun cancelOrder(@Header("Authorization")token: String,@Field("statuspengiriman")status: String,@Field("catatan")catatan: String,@Path("id")id:String,@Query("type") type:String):Call<GlobalResponse>
 
     @GET("courier/order/jenis-ukuran/{idasal}/{idtujuan}")
     fun getJenisUkuran(@Header("Authorization")token:String, @Path("idasal")idasal:Int, @Path("idtujuan")idtujuan:Int,):Call<UkuranResponse>
 
+    @GET("courier/order/jenis-asuransi/{reffno}")
+    fun getJenisAsuransi(@Header("Authorization")token:String, @Path("reffno")idasal:Int):Call<AsuransiResponse>
 
     @Multipart
     @POST("courier/order/waitingPickup/{id}")
     fun updateReadyToPickup(@Header("Authorization")token:String,
                             @Part image:MultipartBody.Part?,
                             @Part("jenisukuran") jenisUkuran : RequestBody?,
+                            @Part("biaya") biaya : RequestBody?,
                             @Part("diserahkanoleh") diserahkanOleh:RequestBody?,
                             @Part("catatan") catatan:RequestBody?,
                             @Part("status") statusPengiriman: RequestBody?,

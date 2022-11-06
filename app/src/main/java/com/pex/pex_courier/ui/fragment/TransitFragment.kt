@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.pex.pex_courier.R
 import com.pex.pex_courier.adapter.TransitAdapter
+import com.pex.pex_courier.helper.ForceCloseHandler
 
 
 class TransitFragment : Fragment() {
@@ -42,5 +43,10 @@ class TransitFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(context))
     }
 }

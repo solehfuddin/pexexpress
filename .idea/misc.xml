@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PEX_Courier/app/src/main/res/drawable/bg_doc.xml" value="0.1415" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PEX_Courier/app/src/main/res/drawable/bg_menu.xml" value="0.1415" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PEX_Courier/app/src/main/res/drawable/btn_logout.xml" value="0.1415" />
@@ -85,21 +86,40 @@
         <entry key="..\:/Users/genta/AndroidStudioProjects/PEX_Courier/app/src/main/res/layout/loading_alert.xml" value="0.209375" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/PEX_Courier/app/src/main/res/menu/navigation_menu.xml" value="0.18" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/PEX_Courier/app/src/main/res/xml/network_config.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/card_button.xml" value="0.1625" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/rounded_shape.xml" value="0.103" />
+        <entry key="app/src/main/res/layout/activity_change_profile.xml" value="0.11979166666666667" />
+        <entry key="app/src/main/res/layout/activity_detail_back_to_sender.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_detail_cancel_pickup.xml" value="0.1984375" />
-        <entry key="app/src/main/res/layout/activity_detail_pending_delivery.xml" value="0.125" />
-        <entry key="app/src/main/res/layout/activity_detail_pick_up.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_detail_pick_up2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail_finish_delivery.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_detail_pending_delivery.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_detail_pick_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail_pick_up2.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_detail_release.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_detail_request_delivery.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail_transit.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/activity_logger.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2140625" />
-        <entry key="app/src/main/res/layout/card_pu.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_qrdelivery.xml" value="0.1609375" />
+        <entry key="app/src/main/res/layout/activity_qrscanner.xml" value="0.15885416666666666" />
+        <entry key="app/src/main/res/layout/app_bar.xml" value="0.11458333333333333" />
+        <entry key="app/src/main/res/layout/card_cu_qr.xml" value="0.18795289855072464" />
+        <entry key="app/src/main/res/layout/card_pu.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/card_pu_custom.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/card_pu_delivery.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/card_pu_qr.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/custom_title_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_image_picker.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_cancel_for_pickup.xml" value="0.17980072463768115" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.13333333333333333" />
         <entry key="app/src/main/res/layout/fragment_p_u.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/fragment_pick_up.xml" value="0.182518115942029" />
-        <entry key="app/src/main/res/layout/fragment_pick_up_requst.xml" value="0.382051282051282" />
+        <entry key="app/src/main/res/layout/fragment_pick_up_requst.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_request_delivery.xml" value="0.22327898550724637" />
+        <entry key="app/src/main/res/layout/input_form.xml" value="0.21195652173913043" />
       </map>
     </option>
   </component>

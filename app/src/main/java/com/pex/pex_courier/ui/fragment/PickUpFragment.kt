@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.pex.pex_courier.R
 import com.pex.pex_courier.adapter.PickUpAdapter
+import com.pex.pex_courier.helper.ForceCloseHandler
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,14 +22,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class PickUpFragment : Fragment() {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-
-
-    }
     private lateinit var viewPager : ViewPager
     private lateinit var tabLayout : TabLayout
     override fun onCreateView(
@@ -36,12 +29,12 @@ class PickUpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         val view = inflater.inflate(R.layout.fragment_pick_up, container, false);
         viewPager = view.findViewById(R.id.view_pager)
         tabLayout = view.findViewById(R.id.tabLayout)
         tabLayout.addTab(tabLayout.newTab().setText("Request"))
         tabLayout.addTab(tabLayout.newTab().setText("Pick Up"))
+        tabLayout.addTab(tabLayout.newTab().setText("Cancel"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         viewPager.adapter = PickUpAdapter(childFragmentManager)
         tabLayout.setupWithViewPager(viewPager)
@@ -49,7 +42,6 @@ class PickUpFragment : Fragment() {
     }
 
     companion object {
-
         fun newInstance(): PickUpFragment{
             val fragment = PickUpFragment()
             val args = Bundle()

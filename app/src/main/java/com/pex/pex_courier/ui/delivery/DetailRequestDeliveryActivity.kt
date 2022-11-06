@@ -12,6 +12,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
@@ -27,6 +28,7 @@ import com.app.imagepickerlibrary.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.pex.pex_courier.R
 import com.pex.pex_courier.dto.order.OrderDTO
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.model.StatusModel
 import com.pex.pex_courier.network.api.ApiInterface
 import com.pex.pex_courier.repository.OrderRepository
@@ -40,8 +42,10 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomsheet.ItemClickListener, ImagePickerActivityClass.OnResult {
+class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerActivityClass.OnResult {
     private lateinit var toolbar : Toolbar
     private lateinit var toolbarTitle : TextView
     private lateinit var toolbarTitle2 : TextView
@@ -57,29 +61,28 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
     private lateinit var tvResi : TextView
     private lateinit var edtNote : EditText
     private lateinit var cardPickImage : ConstraintLayout
-//    private lateinit var imagePicked : ImageView
     private lateinit var imgNewPicked : AppCompatImageView
     private lateinit var spinnerStatus : Spinner
     private lateinit var btnDelivery : Button
     private lateinit var btnPending : Button
     private lateinit var edtReceiver : EditText
     private val REQUEST_PERMISSION = 100
-//    private var imageUri: Uri? = null
-    private val REQUEST_IMAGE_CAPTURE = 1
-    private val REQUEST_PICK_IMAGE = 2
     private val apiInterface  = ApiInterface.create()
     lateinit var listStatus : ArrayList<StatusModel>
     var status = ""
     private var providerOrder : OrderViewModel? = null
     private var sharedPreference: SystemDataLocal? = null
-//    private var mediaPath: String? = null
-//    private var postPath: String? = null
     lateinit var finalFile : File
     private lateinit var imagePicker: ImagePickerActivityClass
+    var data : OrderDTO? = OrderDTO()
+    var pos = 0
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_request_delivery)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         imagePicker = ImagePickerActivityClass(this,this,activityResultRegistry,activity = this)
         helloTitle = findViewById(R.id.tv_hello_title)
         nameTitle = findViewById(R.id.tv_name_title)
@@ -90,6 +93,7 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
         spinnerStatus = findViewById(R.id.spinner_status)
         btnDelivery = findViewById(R.id.btn_delivery)
         btnPending = findViewById(R.id.btn_cancel)
+        btnPending.visibility = View.GONE
         setSupportActionBar(toolbar)
         toolbarTitle2.text = "Request To Direct Delivery"
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -114,49 +118,87 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
         tvPengirim = findViewById(R.id.tv_pengirim)
         tvResi = findViewById(R.id.tv_resi)
         edtNote = findViewById(R.id.edt_note)
-        val data: OrderDTO? = intent.getParcelableExtra("order")
+        data = intent.getParcelableExtra("order")
+        pos = intent.getIntExtra("position", 0)
         val formatter: NumberFormat = DecimalFormat("#,###")
         val myNumber = data?.biaya?.toInt()
         val formattedNumber: String = formatter.format(myNumber)
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"
-        tvTime.text = data?.jampickup.toString()
-        tvDate.text = data?.tanggalpickup.toString()
+        tvTime.text = data?.jampenugasandelivery.toString()
+        tvDate.text = data?.tanggalpenugasandelivery.toString()
         tvPengirim.text = data?.namapengirim.toString()
         tvResi.text = data?.nomortracking.toString()
 
         cardPickImage = findViewById(R.id.card_pick_image)
-//        imagePicked = findViewById(R.id.image_picked)
         imgNewPicked = findViewById(R.id.image_picked)
         cardPickImage.setOnClickListener {
-            val fragment = ImagePickerBottomsheet()
-            fragment.show(supportFragmentManager, bottomSheetActionFragment)
+            showDialogBottom()
         }
-//        imagePicked.setOnClickListener {
-//            showDialogPick()
-//        }
         imgNewPicked.setOnClickListener {
-            val fragment = ImagePickerBottomsheet()
-            fragment.show(supportFragmentManager, bottomSheetActionFragment)
+            showDialogBottom()
         }
         providerOrder = ViewModelProvider(this,
             OrderViewModelFactory(OrderRepository(apiInterface))
         ).get(OrderViewModel::class.java)
         sharedPreference = SystemDataLocal(applicationContext)
-        val user = sharedPreference!!.userFetch()
         val token = sharedPreference!!.fetchToken()
         listStatus =  ArrayList()
         loadDataStatus(token)
         btnDelivery.setOnClickListener {
-            showConfirmDialog(token,data?.idPengiriman)
+            if (spinnerStatus.selectedItem == "PENDING DELIVERY")
+            {
+                val text = "Anda yakin ingin menunda pengiriman tersebut?"
+                showDialog(token,data?.idPengiriman,"30",text)
+            }
+            else
+            {
+                if (spinnerStatus.selectedItem == "RETURNED TO SENDER")
+                {
+
+                }
+
+                showConfirmDialog(token,data?.idPengiriman)
+            }
         }
 
-        btnPending.setOnClickListener {
-            val text = "Anda yakin ingin menunda pengiriman tersebut?"
-            showDialog(token,data?.idPengiriman,"30",text)
+//        btnPending.setOnClickListener {
+//            val text = "Anda yakin ingin menunda pengiriman tersebut?"
+//            showDialog(token,data?.idPengiriman,"30",text)
+//        }
+    }
+
+    fun showDialogBottom() {
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(R.layout.dialog_image_picker)
+        val listView = dialog.findViewById<ListView>(R.id.datalist)
+
+        val options = listOf(
+            "Camera",
+            "Cancel",
+        )
+
+        listView?.adapter = ArrayAdapter(
+            applicationContext,
+            R.layout.custom_title_list,
+            options
+        )
+
+        listView?.setOnItemClickListener { parent, view, position, id ->
+            val element = parent.getItemAtPosition(position)
+            if (element == "Camera")
+            {
+                Log.d("List clicked", "element : $element")
+                imagePicker.takePhotoFromCamera()
+                dialog.dismiss()
+            }
+            else {
+                Log.d("List clicked", "element : $element")
+                dialog.dismiss()
+            }
         }
 
-
+        dialog.show()
     }
 
     @SuppressLint("SetTextI18n")
@@ -182,11 +224,16 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
         progressDialog.setMessage("loading ...")
         progressDialog.show()
         try {
-            providerOrder!!.changeStatus(token,status, idPengiriman.toString(),"").observe(this) { res ->
+            providerOrder!!.changeStatus(token,status,edtNote.text.toString(),idPengiriman.toString(),"").observe(this) { res ->
                 if(res.success == true){
                     Toast.makeText(this, res.message, Toast.LENGTH_SHORT).show()
                     progressDialog.dismiss()
-                    onBackPressed()
+
+                    val intent = Intent()
+                    intent.putExtra("position", pos)
+                    intent.putExtra("data", data)
+                    setResult(RESULT_OK, intent)
+                    finish()
                 }else{
                     Toast.makeText(this, res.message, Toast.LENGTH_SHORT).show()
                     progressDialog.dismiss()
@@ -238,7 +285,13 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
                     if(res.success == true){
                         Toast.makeText(this, res.message, Toast.LENGTH_SHORT).show()
                         progressDialog.dismiss()
-                        onBackPressed()
+
+                        val intent = Intent()
+                        intent.putExtra("position", pos)
+                        intent.putExtra("data", data)
+                        intent.putExtra("title", "card")
+                        setResult(RESULT_OK, intent)
+                        finish()
                     }else{
                         Toast.makeText(this, res.message, Toast.LENGTH_SHORT).show()
                         progressDialog.dismiss()
@@ -255,13 +308,13 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
         val dataStatus = ArrayList<String>()
         providerOrder!!.getStatusDelivery(token).observe(this) { res ->
             if (res.success == true) {
-                res.data.forEach{
+                res.data.forEach {
                     dataStatus.add(it.namastatuspengiriman.toString())
-                    var statusModel = StatusModel(it.id,it.namastatuspengiriman)
+                    var statusModel = StatusModel(it.id, it.namastatuspengiriman)
                     listStatus.add(statusModel)
                     val adapter: ArrayAdapter<String> =
                         ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataStatus)
-                    spinnerStatus.adapter =  adapter
+                    spinnerStatus.adapter = adapter
                     spinnerStatus.setSelection(-1)
                     spinnerStatus.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
@@ -271,61 +324,23 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
                                 i: Int,
                                 l: Long
                             ) {
-                                val data = listStatus[i]
-                                status = data.id.toString()
+                                if (spinnerStatus.selectedItem != "PENDING DELIVERY")
+                                {
+                                    val data = listStatus[i]
+                                    status = data.id.toString()
 
-
+                                    Log.d("Statusnya : ", status)
+                                }
                             }
 
                             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                         }
                 }
+                dataStatus.add("PENDING DELIVERY")
             }
         }
     }
 
-//    fun getImageUri(inContext: Context, inImage: Bitmap): Uri {
-//        val bytes = ByteArrayOutputStream()
-//        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-//        val path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null)
-//        return Uri.parse(path)
-//    }
-//
-//    fun getRealPathFromURI(uri: Uri?): String? {
-//        var path = ""
-//        if (contentResolver != null) {
-//            val cursor = contentResolver.query(uri!!, null, null, null, null)
-//            if (cursor != null) {
-//                cursor.moveToFirst()
-//                val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-//                path = cursor.getString(idx)
-//                cursor.close()
-//            }
-//        }
-//        return path
-//    }
-
-    @SuppressLint("QueryPermissionsNeeded")
-    private fun showDialogPick() {
-        val dialog = BottomSheetDialog(this)
-        dialog.setContentView(R.layout.dialog_pick_image)
-        val pickerCamera: ImageView? = dialog.findViewById(R.id.picker_camera)
-        val pickerGalery: ImageView? = dialog.findViewById(R.id.picker_galery)
-        pickerCamera?.setOnClickListener {
-            Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
-                intent.resolveActivity(packageManager)?.also {
-                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
-                }
-            }
-            dialog.dismiss()
-        }
-        pickerGalery?.setOnClickListener {
-            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, REQUEST_PICK_IMAGE)
-            dialog.dismiss()
-        }
-        dialog.show()
-    }
     override fun onResume() {
         super.onResume()
         checkCameraPermission()
@@ -335,32 +350,6 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         imagePicker.onActivityResult(requestCode, resultCode, data)
-//        if (resultCode == RESULT_OK) {
-//            if (requestCode == REQUEST_IMAGE_CAPTURE) {
-//                val bitmap = data?.extras?.get("data") as Bitmap
-//                imagePicked.setImageBitmap(bitmap)
-//                imagePicked.visibility = View.VISIBLE
-//                cardPickImage.visibility = View.GONE
-//                val tempUri: Uri = getImageUri(applicationContext, bitmap)
-//                finalFile = File(getRealPathFromURI(tempUri))
-//            }
-//            else if (requestCode == REQUEST_PICK_IMAGE) {
-//                imageUri = data?.data
-//                imagePicked.setImageURI(imageUri)
-//                imagePicked.visibility = View.VISIBLE
-//                cardPickImage.visibility = View.GONE
-//                val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-//                val cursor: Cursor? = applicationContext.contentResolver.query(imageUri!!, filePathColumn, null, null, null)
-//                if(cursor != null){
-//                    cursor.moveToFirst()
-//                    val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-//                    mediaPath = cursor.getString(columnIndex)
-//                    cursor.close()
-//                    postPath = mediaPath
-//                    finalFile = File(mediaPath)
-//                }
-//            }
-//        }
     }
 
     private fun checkCameraPermission() {
@@ -378,16 +367,5 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerBottomshee
         cardPickImage.visibility = View.GONE
 
         finalFile = item!!.toFile()
-    }
-
-    override fun onItemClick(item: String?) {
-        when {
-            item.toString() == bottomSheetActionCamera -> {
-                imagePicker.takePhotoFromCamera()
-            }
-            item.toString() == bottomSheetActionGallary -> {
-                imagePicker.choosePhotoFromGallery()
-            }
-        }
     }
 }

@@ -11,6 +11,7 @@ data class OrderDTO(
     @SerializedName("id_tujuan"               ) var idTujuan                : Int?    = 0,
     @SerializedName("id_pegawai"              ) var idPegawai               : Int?    = null,
     @SerializedName("id"                      ) var id                      : Int?    = null,
+    @SerializedName("nm_kurir"                ) var nm_kurir                : String? = "-",
     @SerializedName("nomorpemesanan"          ) var nomorpemesanan          : String? = null,
     @SerializedName("nomortracking"           ) var nomortracking           : String? = null,
     @SerializedName("pelangganbaru"           ) var pelangganbaru           : String? = null,
@@ -68,6 +69,12 @@ data class OrderDTO(
     @SerializedName("jampenugasanpickup"      ) var jampenugasanpickup      : String? = null,
     @SerializedName("tanggalpenugasanshuttle" ) var tanggalpenugasanshuttle : String? = null,
     @SerializedName("jampenugasanshuttle"     ) var jampenugasanshuttle     : String? = null,
+    @SerializedName("tglpenugasandelivery"    ) var tanggalpenugasandelivery: String? = null,
+    @SerializedName("jampenugasandelivery"    ) var jampenugasandelivery    : String? = null,
+    @SerializedName("tglpending"              ) var tanggalpending          : String? = null,
+    @SerializedName("jampending"              ) var jampending              : String? = null,
+    @SerializedName("tglpenugasankembali"     ) var tanggalpenugasankembali : String? = null,
+    @SerializedName("jampenugasankembali"     ) var jampenugasankembali     : String? = null,
     @SerializedName("jampickup"               ) var jampickup               : String? = null,
     @SerializedName("panjangaktual"           ) var panjangaktual           : String? = null,
     @SerializedName("lebaraktual"             ) var lebaraktual             : String? = null,
@@ -85,7 +92,7 @@ data class OrderDTO(
     @SerializedName("tglbatal"                ) var tglbatal                : String? = null,
     @SerializedName("jambatal"                ) var jambatal                : String? = null,
     @SerializedName("cabang"                  ) var cabang                  : String? = null,
-    @SerializedName("id_ukuran"               ) var idUkuran                : Int?    = null,
+    @SerializedName("id_ukuran"               ) var idUkuran                : Int?    = 0,
     @SerializedName("kodejenisukuran"         ) var kodejenisukuran         : String? = null,
     @SerializedName("maksimalpanjang"         ) var maksimalpanjang         : String? = null,
     @SerializedName("maksimallebar"           ) var maksimallebar           : String? = null,
@@ -93,6 +100,11 @@ data class OrderDTO(
     @SerializedName("maksimalberat"           ) var maksimalberat           : String? = null,
     @SerializedName("satuanpanjang"           ) var satuanpanjang           : String? = null,
     @SerializedName("isactive"                ) var isactive                : Int?    = null,
-    @SerializedName("nama_jenis_pembayaran"   ) var namaJenisPembayaran     : String?    = null
+    @SerializedName("nama_jenis_pembayaran"   ) var namaJenisPembayaran     : String? = null,
+    @SerializedName("namajenisbarang"         ) var namaJenisBarang         : String? = null,
+    @SerializedName("statusdelivery"          ) var statusdelivery          : Int?    = 0,
+    @SerializedName("kodeasuransi"            ) var kodeasuransi            : String? = null,
+    @SerializedName("biayaasuransi"           ) var biayaasuransi           : Int?    = 0,
+
 
 ) : Parcelable

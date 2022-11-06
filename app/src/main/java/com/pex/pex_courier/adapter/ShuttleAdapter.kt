@@ -15,7 +15,7 @@ class ShuttleAdapter(fm:FragmentManager):FragmentPagerAdapter(fm) {
     )
 
     override fun getItem(position: Int): Fragment {
-        return pages[position]
+        return pages[position] as Fragment
     }
 
     override fun getCount(): Int {

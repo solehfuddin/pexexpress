@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.pex.pex_courier.R
 import com.pex.pex_courier.adapter.ShuttleAdapter
+import com.pex.pex_courier.helper.ForceCloseHandler
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,8 +31,9 @@ class ForwardFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_forward, container, false);
         viewPager = view.findViewById(R.id.view_pager)
         tabLayout = view.findViewById(R.id.tabLayout)
-//        tabLayout.addTab(tabLayout.newTab().setText("Request"))
-//        tabLayout.addTab(tabLayout.newTab().setText("Shuttle"))
+        tabLayout.addTab(tabLayout.newTab().setText("Request"))
+        tabLayout.addTab(tabLayout.newTab().setText("Shuttle"))
+        tabLayout.addTab(tabLayout.newTab().setText("Release"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         viewPager.adapter = ShuttleAdapter(childFragmentManager)
         tabLayout.setupWithViewPager(viewPager)

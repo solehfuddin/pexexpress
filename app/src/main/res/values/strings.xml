@@ -22,6 +22,7 @@
     <string name="resi">NXDJBD1000016JBD1222</string>
     <string name="tgl">15 Februari 2022</string>
     <string name="status">Status</string>
+    <string name="statusdelivery">Belum Terscan</string>
     <string name="package_already_to_pickup">PACKAGE ALREADY TO PICKUP</string>
     <string name="nextday_1_2_hari">Nextday (1-2 Hari)</string>
     <string name="layanan">Layanan</string>
@@ -51,4 +52,9 @@
     <string name="foto">Foto</string>
     <string name="cetak_resi">Cetak Resi</string>
     <string name="cetak_masal">Cetak Massal</string>
+    <string name="camera">Camera</string>
+    <string name="cancel">Cancel</string>
+    <string name="asuransi">Dengan asuransi</string>
+    <string name="laporkan_kesalahan">Laporkan Kesalahan</string>
+    <string name="kurir_pickup">Kurir Pickup</string>
 </resources>

@@ -10,8 +10,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="15dp"
-    app:cardElevation="1dp"
-    >
+    app:cardElevation="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -62,14 +61,12 @@
             app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
 
-
-
         <ImageView
-            android:layout_marginTop="@dimen/margin_activity"
             android:id="@+id/imageView5"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="@dimen/margin_activity"
             android:src="@drawable/nearme"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -89,10 +86,11 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_activity"
+            android:layout_marginEnd="16dp"
             android:text="@string/pengirim"
             android:textColor="@color/coloRed"
             android:textStyle="bold"
-            android:layout_marginHorizontal="@dimen/margin_activity"
             app:layout_constraintBottom_toBottomOf="@+id/tv_sender"
             app:layout_constraintEnd_toStartOf="@+id/btnWaSender"
             app:layout_constraintTop_toTopOf="@+id/tv_sender" />
@@ -102,9 +100,10 @@
             android:id="@+id/btnWaSender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
             android:src="@drawable/whatsapp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_sender"
-            app:layout_constraintEnd_toEndOf="@+id/tv_address_sender"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_sender" />
 
         <TextView
@@ -113,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="62dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginEnd="40dp"
             android:letterSpacing="0.05"
             android:text="@string/alamat"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="62dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginEnd="40dp"
             android:letterSpacing="0.05"
             android:text="@string/alamat"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +136,7 @@
             android:id="@+id/imageView7"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginStart="13dp"
             android:layout_marginTop="@dimen/margin_activity"
             android:src="@drawable/location"
             app:layout_constraintStart_toStartOf="parent"
@@ -169,19 +168,21 @@
             android:id="@+id/btnWaReceiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="13dp"
             android:src="@drawable/whatsapp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_receiver"
-            app:layout_constraintEnd_toEndOf="@+id/btnWaSender"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_activity"
+            android:layout_marginEnd="16dp"
             android:text="Penerima"
             android:textColor="@color/teal_700"
             android:textStyle="bold"
-            android:layout_marginHorizontal="@dimen/margin_activity"
             app:layout_constraintBottom_toBottomOf="@+id/tv_receiver"
             app:layout_constraintEnd_toStartOf="@+id/btnWaReceiver"
             app:layout_constraintTop_toTopOf="@+id/tv_receiver" />
@@ -190,30 +191,38 @@
             android:id="@+id/tv_address_receiver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="40dp"
+            android:letterSpacing="0.05"
             android:text="@string/alamat"
             app:layout_constraintEnd_toEndOf="@+id/textView12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_receiver"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginStart="62dp"
-            android:layout_marginTop="@dimen/margin_small"
-            android:letterSpacing="0.05"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tv_receiver" />
 
         <TextView
             android:id="@+id/tv_patokan_receiver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:letterSpacing="0.05"
+            android:paddingBottom="@dimen/margin_small"
             android:text="@string/alamat"
             app:layout_constraintEnd_toEndOf="@+id/textView12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_address_receiver"
-            android:layout_marginEnd="@dimen/margin_small"
-            android:layout_marginStart="62dp"
-            android:layout_marginTop="10dp"
-            android:letterSpacing="0.05"
-            android:paddingBottom="@dimen/margin_small"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/tv_address_receiver" />
+
+        <CheckBox
+            android:id="@+id/cbSelected"
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="16dp"
+            android:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_patokan_receiver"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

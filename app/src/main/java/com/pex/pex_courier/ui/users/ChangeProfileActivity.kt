@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.pex.pex_courier.R
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.network.api.ApiInterface
 import com.pex.pex_courier.repository.ChangeProfileRepository
 import com.pex.pex_courier.session.SystemDataLocal
@@ -37,6 +38,8 @@ class ChangeProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_profile)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         sharedPreference = SystemDataLocal(applicationContext)
         token = sharedPreference!!.fetchToken()
         edtFirstName = findViewById(R.id.edt_first_name)
@@ -66,6 +69,7 @@ class ChangeProfileActivity : AppCompatActivity() {
             onBackPressed()
         }
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        btnSubmit.isEnabled = false
         btnSubmit.setOnClickListener{
             changeProfile()
         }

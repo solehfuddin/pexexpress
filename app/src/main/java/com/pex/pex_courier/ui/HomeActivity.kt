@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pex.pex_courier.R
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.session.SystemDataLocal
 import com.pex.pex_courier.ui.fragment.*
 import com.pex.pex_courier.ui.users.ProfileActivity

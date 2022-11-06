@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.pex.pex_courier.R
 import com.pex.pex_courier.dto.order.OrderDTO
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.helper.Helper
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -25,16 +26,20 @@ class DetailFinishDeliveryActivity : AppCompatActivity() {
     private lateinit var tvLayanan : TextView
     private lateinit var tvTime : TextView
     private lateinit var tvTarif : TextView
+    private lateinit var tvPengirim : TextView
+    private lateinit var tvResi : TextView
     private lateinit var tvDate : TextView
     private lateinit var inputReceivedBy : View
     private lateinit var edtStatusPickup : EditText
     private lateinit var edtNote : EditText
     private lateinit var imageReceived:ImageView
-    private lateinit var btnResi:TextView
+//    private lateinit var btnResi:TextView
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_finish_delivery)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         helloTitle = findViewById(R.id.tv_hello_title)
         nameTitle = findViewById(R.id.tv_name_title)
         btnSetting = findViewById(R.id.btn_setting)
@@ -42,7 +47,7 @@ class DetailFinishDeliveryActivity : AppCompatActivity() {
         toolbarTitle = findViewById(R.id.toolbar_title)
         toolbarTitle2 = findViewById(R.id.toolbar_title2)
         imageReceived = findViewById(R.id.imageReceived)
-        btnResi = findViewById(R.id.printResi)
+//        btnResi = findViewById(R.id.printResi)
         setSupportActionBar(toolbar)
         toolbarTitle2.text = "Finish Delivery"
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -67,6 +72,8 @@ class DetailFinishDeliveryActivity : AppCompatActivity() {
         tvTime = findViewById(R.id.tv_time)
         tvDate = findViewById(R.id.tv_date)
         tvTarif = findViewById(R.id.tv_tarif)
+        tvPengirim = findViewById(R.id.tv_pengirim)
+        tvResi = findViewById(R.id.tv_resi)
         edtStatusPickup = findViewById(R.id.edt_status_pickup)
         edtNote = findViewById(R.id.edt_note)
         val data: OrderDTO? = intent.getParcelableExtra("order")
@@ -75,16 +82,13 @@ class DetailFinishDeliveryActivity : AppCompatActivity() {
         val formattedNumber: String = formatter.format(myNumber)
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"
-        tvTime.text = data?.jampickup.toString()
-        tvDate.text = data?.tanggalpickup.toString()
+        tvResi.text = data?.nomortracking.toString()
+        tvPengirim.text = data?.namapengirim.toString()
+        tvTime.text = data?.jamdelivery.toString()
+        tvDate.text = data?.tanggaldelivery.toString()
         edtStatusPickup.setText(data?.statusPengiriman.toString())
         edtNote.setText(data?.catatanpengirim.toString())
-        edtReceivedBy.setText(data?.namapenerima.toString())
+        edtReceivedBy.setText(data?.diserahkanolehdelivery.toString())
         Glide.with(this).load("${Helper.imageURL}foto_penyerahan_delivery/${data?.fotomenyerahkandelivery}").into(imageReceived)
-        btnResi.setOnClickListener {
-            data?.let { it1 -> Helper.printResi(it1,this.applicationContext,tvTarif.text.toString(),
-                it1.jenisukuran!!
-            ) }
-        }
     }
 }

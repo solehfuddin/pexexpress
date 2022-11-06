@@ -1,5 +1,7 @@
 package com.pex.pex_courier.ui.transit
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +9,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.pex.pex_courier.R
-import com.pex.pex_courier.adapter.RecyclerViewAdapter
+import com.pex.pex_courier.adapter.NewViewAdapter
+import com.pex.pex_courier.adapter.QrcodeViewAdapter
 import com.pex.pex_courier.dto.order.OrderDTO
+import com.pex.pex_courier.helper.CallbackClick
 import com.pex.pex_courier.network.api.ApiInterface
 import com.pex.pex_courier.repository.OrderRepository
 import com.pex.pex_courier.session.SystemDataLocal
@@ -22,18 +29,21 @@ import com.pex.pex_courier.viewmodel.OrderViewModel
 import com.pex.pex_courier.viewmodel.OrderViewModelFactory
 
 
-class AfterRequestTransit : Fragment() {
-
-
+class AfterRequestTransit : Fragment(), CallbackClick {
     private lateinit var recylcerView : RecyclerView
-    private lateinit var recyclerViewAdapter : RecyclerViewAdapter
+//    private lateinit var recyclerViewAdapter : NewViewAdapter
+    private lateinit var recyclerViewAdapter : QrcodeViewAdapter
     private val apiInterface  = ApiInterface.create()
     private var provider : OrderViewModel? = null
     private var sharedPreference: SystemDataLocal? = null
     private lateinit var progressBar: ProgressBar
     private lateinit var progressBarB: ProgressBar
     private var limit :Int? = 0
-    private lateinit var orders : ArrayList<OrderDTO>
+    private var offset:Int? = 0
+    private var total :Int? = 0
+    private var orders = ArrayList<OrderDTO>()
+    private var temp = arrayListOf<OrderDTO>()
+    private var tempOrder = mutableSetOf<OrderDTO>()
     private lateinit var ivNoData : ImageView
     private lateinit var tvNoData : TextView
     private var token:String? = null
@@ -49,7 +59,8 @@ class AfterRequestTransit : Fragment() {
         ivNoData = view.findViewById(R.id.iv_no_data)
         tvNoData = view.findViewById(R.id.tv_no_data)
         val activity = QRScannerActivity()
-        recyclerViewAdapter = context?.let { RecyclerViewAdapter(it, activity = activity) }!!
+//        recyclerViewAdapter = context?.let { NewViewAdapter(it, activity = activity, this) }!!
+        recyclerViewAdapter = context?.let { QrcodeViewAdapter(it, activity = activity, this) }!!
         recylcerView.layoutManager = LinearLayoutManager(context)
         recylcerView.adapter = recyclerViewAdapter
         recyclerViewAdapter.setStatus("27")
@@ -62,39 +73,104 @@ class AfterRequestTransit : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
                     progressBarB.visibility = View.VISIBLE
-                    limit = limit?.plus(5)
-                    readData(token!!,limit!!,2)
+                    offset = offset?.plus(5)
+                    if (total!! > offset!!)
+                    {
+                        loadMore(token!!,limit!!,offset!!)
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "No more data available", Toast.LENGTH_SHORT).show()
+                        progressBarB.visibility = View.GONE
+                    }
                 }
             }
         })
-        limit = 5
-        readData(token!!,limit!!,1)
         return view
     }
 
     override fun onResume() {
-        progressBar.visibility = View.VISIBLE
-        token?.let { readData(it,limit!!,1) }
         super.onResume()
+        limit = 5
+        offset = 0
+        readData(token!!,limit!!,offset!!)
     }
-    private fun readData(token:String,limit:Int,type:Int) {
-        provider!!.dataOrder(token, 26, limit).observe(viewLifecycleOwner) { res ->
+
+    private fun readData(token:String,limit:Int,offset:Int) {
+        provider!!.dataOrderNew(token, 26, limit,offset).observe(viewLifecycleOwner) { res ->
             if (res.success == true) {
-                if (type == 2) {
-                    progressBarB.visibility = View.GONE
-                }
-                if (res.data.size > 0) {
-                    ivNoData.visibility = View.GONE
-                    tvNoData.visibility = View.GONE
-                } else {
-                    ivNoData.visibility = View.VISIBLE
-                    tvNoData.visibility = View.VISIBLE
-                }
+                ivNoData.visibility = View.GONE
+                tvNoData.visibility = View.GONE
                 recylcerView.visibility = View.VISIBLE
                 progressBar.visibility = View.GONE
+                progressBarB.visibility = View.GONE
+
                 orders = res.data
-                recyclerViewAdapter.setDataListItems(orders)
+                tempOrder.addAll(orders)
+                total = res.total
+
+                recyclerViewAdapter.setDataListItems(tempOrder)
+            }
+            else
+            {
+                ivNoData.visibility = View.VISIBLE
+                tvNoData.visibility = View.VISIBLE
+                recylcerView.visibility = View.GONE
+                progressBar.visibility = View.GONE
+                progressBarB.visibility = View.GONE
             }
         }
+    }
+
+    private fun loadMore(token:String,limit:Int,offset:Int) {
+        provider!!.dataOrderNew(token, 26, limit,offset).observe(viewLifecycleOwner) { res ->
+            if (res.success == true) {
+                ivNoData.visibility = View.GONE
+                tvNoData.visibility = View.GONE
+                recylcerView.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+                progressBarB.visibility = View.GONE
+                temp = res.data
+                tempOrder.addAll(temp)
+                orders = tempOrder.toList() as ArrayList<OrderDTO>
+
+                recyclerViewAdapter.setDataListItems(tempOrder)
+            }
+
+            progressBar.visibility = View.GONE
+            progressBarB.visibility = View.GONE
+        }
+    }
+
+    private fun removeItem(position : Int, data: OrderDTO) {
+        recyclerViewAdapter.removeItemList(position, data)
+        orders.remove(data)
+        tempOrder.remove(data)
+    }
+
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val intent = result.data
+            val data = intent?.getParcelableExtra<OrderDTO>("data")
+            val pos = intent?.getIntExtra("position", 0)
+            removeItem(pos!!, data!!)
+        }
+    }
+
+    override fun onItemClicked(
+        view: View,
+        data: OrderDTO,
+        status: String,
+        title: String,
+        position: Int
+    ) {
+        val intent = Intent(context, QRScannerActivity::class.java)
+        intent.putExtra("order",data)
+        intent.putExtra("status",status)
+        intent.putExtra("title",title)
+        intent.putExtra("position",position)
+        intent.putExtra("from","transit")
+        startForResult.launch(intent)
     }
 }

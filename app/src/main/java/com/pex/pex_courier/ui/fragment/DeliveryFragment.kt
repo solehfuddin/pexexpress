@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.pex.pex_courier.R
 import com.pex.pex_courier.adapter.DeliveryAdapter
+import com.pex.pex_courier.helper.ForceCloseHandler
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +33,7 @@ class DeliveryFragment : Fragment() {
         tabLayout.addTab(tabLayout.newTab().setText("Pick Up"))
         tabLayout.addTab(tabLayout.newTab().setText("Pending"))
         tabLayout.addTab(tabLayout.newTab().setText("Back to Sender"))
+        tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
         viewPager.adapter = DeliveryAdapter(childFragmentManager)
         tabLayout.setupWithViewPager(viewPager)
@@ -46,5 +48,10 @@ class DeliveryFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(context))
     }
 }

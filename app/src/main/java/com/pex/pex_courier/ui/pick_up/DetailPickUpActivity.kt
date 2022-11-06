@@ -1,18 +1,15 @@
 package com.pex.pex_courier.ui.pick_up
 
 import android.annotation.SuppressLint
-import android.media.Image
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.pex.pex_courier.R
 import com.pex.pex_courier.dto.order.OrderDTO
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.helper.Helper
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -38,10 +35,13 @@ class DetailPickUpActivity : AppCompatActivity() {
     private lateinit var printResi : TextView
     private lateinit var edtJenisUkuran : EditText
     private lateinit var btnCetak : Button
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_pick_up2)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         helloTitle = findViewById(R.id.tv_hello_title)
         nameTitle = findViewById(R.id.tv_name_title)
         ivImg = findViewById(R.id.iv_image)
@@ -69,7 +69,6 @@ class DetailPickUpActivity : AppCompatActivity() {
         val edtReceivedBy: EditText = inputReceivedBy.findViewById(R.id.edt_input)
         edtReceivedBy.isEnabled = false
 
-
         tvLayanan = findViewById(R.id.tv_layanan)
         tvTime = findViewById(R.id.tv_time)
         tvDate = findViewById(R.id.tv_date)
@@ -80,7 +79,7 @@ class DetailPickUpActivity : AppCompatActivity() {
         edtNote = findViewById(R.id.edt_note)
         val data: OrderDTO? = intent.getParcelableExtra("order")
         val title: String? = intent.getStringExtra("title")
-        toolbarTitle2.text = title ?: "Pickup"
+        toolbarTitle2.text = "Pickup"
 
         val formatter: NumberFormat = DecimalFormat("#,###")
         val myNumber = data?.biaya?.toInt()

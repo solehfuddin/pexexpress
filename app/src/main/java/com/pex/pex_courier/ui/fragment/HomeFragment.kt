@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import com.pex.pex_courier.R
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.network.api.ApiInterface
 import com.pex.pex_courier.repository.DashboardRepository
 import com.pex.pex_courier.session.SystemDataLocal
@@ -44,6 +45,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(context))
+
         periode = view.findViewById(R.id.spinner_periode)
         progressBar = view.findViewById(R.id.progressBar)
         numberEmployee = view.findViewById(R.id.tv_nik)
@@ -156,5 +159,4 @@ class HomeFragment : Fragment() {
             return fragment
         }
     }
-
 }

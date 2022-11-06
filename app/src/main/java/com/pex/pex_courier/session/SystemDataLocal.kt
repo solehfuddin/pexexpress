@@ -1,5 +1,6 @@
 package com.pex.pex_courier.session
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
@@ -40,9 +41,11 @@ class SystemDataLocal(private val context: Context?) {
     }
 
 
+    @SuppressLint("CommitPrefEdits")
     fun editLogout(){
         with(sharedPref.edit()){
-            putBoolean("login_status",false)
+            clear()
+//            putBoolean("login_status",false)
             apply()
         }
     }

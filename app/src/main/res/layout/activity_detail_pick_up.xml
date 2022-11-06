@@ -11,9 +11,19 @@
     <include
         android:id="@+id/include3"
         layout="@layout/app_bar"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -54,7 +64,7 @@
             android:layout_marginEnd="26dp"
             android:text="@string/resi"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewPengirim"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="@string/time"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView11"
             app:layout_constraintEnd_toEndOf="@+id/tv_date"
@@ -119,7 +129,7 @@
             android:layout_marginStart="@dimen/margin_small"
             android:text="Rp 15.000"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView12"
             app:layout_constraintStart_toEndOf="@+id/imageView12"
@@ -145,6 +155,7 @@
             android:text="@string/tgl"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView13" />
@@ -186,11 +197,22 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:background="@drawable/card_spinner">
 
-                <Spinner
+                <TextView
+                    android:id="@+id/text_ukuran"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:textSize="17sp"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
+                <Spinner
                     android:id="@+id/spinner_ukuran"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:visibility="gone"
                     android:background="@color/colorTransparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageView16"
@@ -208,6 +230,44 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_activity"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="Asuransi"
+                tools:ignore="HardcodedText" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="@dimen/margin_activity"
+                android:layout_marginTop="@dimen/margin_small"
+                android:background="@drawable/card_spinner">
+
+                <Spinner
+                    android:id="@+id/spinner_asuransi"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorTransparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView17"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView17"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <include
                 android:id="@+id/received_by_input"
@@ -242,16 +302,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-            <!--            <ImageView-->
-            <!--                android:layout_marginTop="@dimen/margin_activity"-->
-            <!--                android:layout_marginHorizontal="@dimen/margin_activity"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="180dp"-->
-            <!--                android:id="@+id/image_picked"-->
-            <!--                android:layout_gravity="center_horizontal"-->
-            <!--                android:visibility="gone"-->
-            <!--                android:scaleType="centerCrop"-->
-            <!--                />-->
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_picked"
                 android:layout_width="match_parent"

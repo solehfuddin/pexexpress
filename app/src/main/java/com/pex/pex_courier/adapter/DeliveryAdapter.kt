@@ -18,7 +18,7 @@ class DeliveryAdapter(fm:FragmentManager):FragmentPagerAdapter(fm) {
 
     // menentukan fragment yang akan dibuka pada posisi tertentu
     override fun getItem(position: Int): Fragment {
-        return pages[position]
+        return pages[position] as Fragment
     }
 
     override fun getCount(): Int {

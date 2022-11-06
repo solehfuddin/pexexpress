@@ -1,0 +1,10 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="22sp"
+    android:textColor="@color/black"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:text="@string/camera"
+    android:gravity="center_vertical|center"
+    android:minHeight="55dp" />

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.pex.pex_courier.R
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.session.SystemDataLocal
 import com.pex.pex_courier.ui.MainActivity
 
@@ -33,6 +34,8 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         changePassword = findViewById(R.id.cardPassword)
         changeProfile = findViewById(R.id.changeProfile)
         tvName = findViewById(R.id.tvName)
@@ -64,9 +67,9 @@ class ProfileActivity : AppCompatActivity() {
 
         btnLogout.setOnClickListener {
             sharedPreference!!.editLogout()
-            val intent = Intent(applicationContext,MainActivity::class.java)
-            startActivity(intent)
             finish()
+//            val intent = Intent(applicationContext,MainActivity::class.java)
+//            startActivity(intent)
         }
         sharedPreference = SystemDataLocal(this)
         val user = sharedPreference!!.userFetch()

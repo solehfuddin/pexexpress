@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import com.pex.pex_courier.R
+import com.pex.pex_courier.helper.ForceCloseHandler
 import com.pex.pex_courier.network.api.ApiInterface
 import com.pex.pex_courier.repository.ChangePasswordRepository
 import com.pex.pex_courier.session.SystemDataLocal
@@ -37,6 +38,8 @@ class ChangPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chang_password_activiy)
+        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+
         toolbar = findViewById(R.id.include3)
         toolbarTitle = findViewById(R.id.toolbar_title)
         toolbarTitle2 = findViewById(R.id.toolbar_title2)
