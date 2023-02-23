@@ -13,6 +13,9 @@
     <color name="colorGrey">#F8F8F8</color>
     <color name="coloRed">#E80A0A</color>
     <color name="colorTransparent">#00F8F8F8</color>
+    <color name="colorGray">#9E9E9E</color>
+    <color name="colorActive">#0091EA</color>
+    <color name="colorSuccess">#58cb6e</color>
     <string-array name="pieColors">
         <item>#f55a42</item>
         <item>#AA16D3</item>

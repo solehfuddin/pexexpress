@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pex.pex_courier.R
 import com.pex.pex_courier.dto.order.OrderDTO
 import com.pex.pex_courier.helper.CallbackInterface
-import com.pex.pex_courier.ui.pick_up.DetailCancelPickupActivity
-import com.pex.pex_courier.ui.pick_up.DetailPickUpActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
-class CustomViewAdapter(val context: Context, val activity : Activity, val showChecked : Boolean, val callback: CallbackInterface) : RecyclerView.Adapter<CustomViewAdapter.CustomViewHolder>() {
+class CustomViewAdapter(val context: Context, val activity : Activity, private val showChecked : Boolean, private val callback: CallbackInterface) : RecyclerView.Adapter<CustomViewAdapter.CustomViewHolder>() {
     private var listData = ArrayList<OrderDTO>()
     private var status: String? = ""
     private var title : String? = ""
@@ -56,11 +56,84 @@ class CustomViewAdapter(val context: Context, val activity : Activity, val showC
         return listData
     }
 
+    private fun String.capitalized(): String {
+        return this.replaceFirstChar {
+            if (it.isLowerCase())
+                it.titlecase(Locale.getDefault())
+            else it.toString()
+        }
+    }
+
+    private fun String.myCapitalize(): String {
+        return this.lowercase().replaceFirstChar { it.uppercase()  }
+    }
+
+    private fun String.wordCapitalize() : String {
+        return this.split(" ").joinToString (" ") {it.myCapitalize()}
+    }
+
+    private fun wrapText(str: String, textviewWidth: Int): String {
+        var temp = ""
+        var sentence = ""
+        val array = str.split(" ").toTypedArray() // split by space
+        for (word in array) {
+            if (temp.length + word.length < textviewWidth) {  // create a temp variable and check if length with new word exceeds textview width.
+                temp += " $word"
+            } else {
+                sentence += """
+                $temp
+                
+                """.trimIndent() // add new line character
+                temp = word
+            }
+        }
+        return sentence.replaceFirst(" ".toRegex(), " ") + temp
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val data = listData[position]
         val patokanPengirim = "Patokan : " + data.alamatpengirim
         val patokanPenerima = "Patokan : " + data.alamatpenerima
+
+        val kurirDeliv = if (data.kurirDelivery.isNullOrEmpty()) {
+            "-"
+        } else {
+            if (data.kurirDelivery?.length!! >= 12)
+            {
+                wrapText(data.kurirDelivery!!.wordCapitalize(), 13) }
+            else
+            {
+                data.kurirDelivery?.wordCapitalize().toString()
+            }
+        }
+
+        val kurirShut = if (data.kurirShuttle.isNullOrEmpty()) {
+            "-"
+        }else{
+            if (data.kurirShuttle?.length!! >= 12)
+            {
+                wrapText(data.kurirShuttle!!.wordCapitalize(), 13)
+            }
+            else
+            {
+                data.kurirShuttle?.wordCapitalize().toString()
+            }
+        }
+
+        val kurirTrans = if (data.kurirTransit.isNullOrEmpty()) {
+            "-"
+        }else{
+            if (data.kurirTransit?.length!! >= 14)
+            {
+                wrapText(data.kurirTransit!!.wordCapitalize(), 14)
+            }
+            else
+            {
+                data.kurirTransit?.wordCapitalize().toString()
+            }
+        }
+
         holder.tvReceiver!!.text = data.namapenerima
         holder.tvSender.text = data.namapengirim
         holder.tvAddressSender.text = data.gkecamatanpengirim
@@ -69,7 +142,9 @@ class CustomViewAdapter(val context: Context, val activity : Activity, val showC
         holder.tvPatokanReceiver.text = patokanPenerima
         holder.tvResi.text = data.nomortracking
         holder.tvDate.text = data.tanggalpenugasanpickup
-        holder.tvKurirName.text = data.nm_kurir
+        holder.tvKurirDelivery.text = kurirDeliv
+        holder.tvKurirShuttle.text = kurirShut
+        holder.tvKurirTransit.text = kurirTrans
 
         if (showChecked)
         {
@@ -124,7 +199,6 @@ class CustomViewAdapter(val context: Context, val activity : Activity, val showC
 
         holder.cardView.setOnClickListener {
             val intent = Intent(context,activity::class.java)
-//            val intent = Intent(context, DetailCancelPickupActivity::class.java)
             intent.putExtra("order",data)
             intent.putExtra("status",status!!)
             intent.putExtra("title",title!!)
@@ -141,6 +215,7 @@ class CustomViewAdapter(val context: Context, val activity : Activity, val showC
         this.listData.clear()
         this.listData.addAll(listData)
         notifyItemInserted(listData.size)
+        notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -162,6 +237,8 @@ class CustomViewAdapter(val context: Context, val activity : Activity, val showC
         val cardView : CardView = itemView!!.findViewById(R.id.card_view)
         val btnWaSender : ImageView = itemView!!.findViewById(R.id.btnWaSender)
         val btnWaReceiver : ImageView = itemView!!.findViewById(R.id.btnWaReceiver)
-        val tvKurirName : TextView = itemView!!.findViewById(R.id.tv_nm_kurir)
+        val tvKurirDelivery : TextView = itemView!!.findViewById(R.id.tv_nm_kurir)
+        val tvKurirShuttle : TextView = itemView!!.findViewById(R.id.tv_nm_shuttle)
+        val tvKurirTransit : TextView = itemView!!.findViewById(R.id.tv_nm_transit)
     }
 }

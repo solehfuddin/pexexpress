@@ -79,10 +79,10 @@ class DetailPickUpActivity : AppCompatActivity() {
         edtNote = findViewById(R.id.edt_note)
         val data: OrderDTO? = intent.getParcelableExtra("order")
         val title: String? = intent.getStringExtra("title")
-        toolbarTitle2.text = "Pickup"
+        toolbarTitle2.text = title
 
         val formatter: NumberFormat = DecimalFormat("#,###")
-        val myNumber = data?.biaya?.toInt()
+        val myNumber = data?.biaya ?: 0
         val formattedNumber: String = formatter.format(myNumber)
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"
@@ -102,6 +102,11 @@ class DetailPickUpActivity : AppCompatActivity() {
 
         btnCetak.setOnClickListener{
             data?.let { it1 -> Helper.printResi(it1,this.applicationContext,tvTarif.text.toString(),edtJenisUkuran.text.toString()) }
+        }
+
+        if (title != "Pickup")
+        {
+            btnCetak.visibility = View.GONE
         }
     }
 

@@ -67,17 +67,17 @@ class ForgetPasswordActivity : AppCompatActivity() {
         progressDialog.setTitle("Please Wait")
         progressDialog.setMessage("loading ...")
         progressDialog.show()
-        provider!!.requestOTP(requestOTPModel).observe(this,{res->
-        if(res.success == true){
-            progressDialog.dismiss()
-            val intent = Intent(applicationContext, SendOtpActivity::class.java)
-            intent.putExtra("phone",edtPhone.text.toString())
-            startActivity(intent)
-            finish()
-        }else{
-            progressDialog.dismiss()
-            Toast.makeText(applicationContext,res.message,Toast.LENGTH_LONG).show()
-         }
-        })
+        provider!!.requestOTP(requestOTPModel).observe(this) { res ->
+            if (res.status == true) {
+                progressDialog.dismiss()
+                val intent = Intent(applicationContext, SendOtpActivity::class.java)
+                intent.putExtra("phone", edtPhone.text.toString())
+                startActivity(intent)
+                finish()
+            } else {
+                progressDialog.dismiss()
+                Toast.makeText(applicationContext, res.message, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 }

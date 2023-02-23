@@ -30,18 +30,38 @@
         android:theme="@style/Theme.PEX_Courier"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.pex.pex_courier.ui.PaymentWalletActivity.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+
         <activity
-            android:name=".DetailReleaseActivity"
+            android:name=".ui.PaymentWalletActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailTransitActivity"
+            android:name=".ui.PaymentVAActivity"
             android:exported="false" />
         <activity
-            android:name=".LoggerActivity"
+            android:name=".ui.PaymentSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".QRDeliveryActivity"
-            android:exported="false" />
+            android:name=".ui.pick_up.DetailPaymentActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".DetailReleaseActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".DetailTransitActivity" -->
+        <!-- android:exported="false" /> -->
+        <activity
+            android:name=".ui.LoggerActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".QRDeliveryActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".ui.delivery.DetailPendingDeliveryActivity"
             android:exported="false" />

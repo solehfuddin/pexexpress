@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,10 @@ class PickUpRequestFragment : Fragment(), CallbackClick {
     private var total :Int? = 0
     lateinit var token:String
 
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 5000
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,10 +92,27 @@ class PickUpRequestFragment : Fragment(), CallbackClick {
     }
 
     override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            limit = 5
+            offset = 0
+
+            if (orders.size > 0)
+            {
+                temp.clear()
+                tempOrder.clear()
+                orders.clear()
+            }
+
+            readData(token,limit!!,offset!!)
+        }.also { runnable = it }, delay.toLong())
+
         super.onResume()
-        limit = 5
-        offset = 0
-        readData(token,limit!!,offset!!)
+    }
+
+    override fun onPause() {
+        handler.removeCallbacks(runnable!!)
+        super.onPause()
     }
 
     @SuppressLint("NotifyDataSetChanged")

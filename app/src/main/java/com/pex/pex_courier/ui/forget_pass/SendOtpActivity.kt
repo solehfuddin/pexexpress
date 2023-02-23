@@ -101,18 +101,18 @@ class SendOtpActivity : AppCompatActivity() {
         progressDialog.setTitle("Please Wait")
         progressDialog.setMessage("loading ...")
         progressDialog.show()
-        provider!!.checkOTP(checkOTPModel).observe(this,{
-            if(it.success == true) {
+        provider!!.checkOTP(checkOTPModel).observe(this) {
+            if (it.success == true) {
                 progressDialog.dismiss()
                 val intent = Intent(applicationContext, NewPasswordActivity::class.java)
-                intent.putExtra("token",it.token)
+                intent.putExtra("token", it.token)
                 startActivity(intent)
                 finish()
-            }else{
+            } else {
                 progressDialog.dismiss()
-                Toast.makeText(applicationContext,it.message,Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
             }
-        })
+        }
     }
 
     private fun requestOTP (requestOTPModel: RequestOTPModel) {
@@ -120,15 +120,15 @@ class SendOtpActivity : AppCompatActivity() {
         progressDialog.setTitle("Please Wait")
         progressDialog.setMessage("loading ...")
         progressDialog.show()
-        provider!!.requestOTP(requestOTPModel).observe(this,{res->
-            if(res.success == true){
+        provider!!.requestOTP(requestOTPModel).observe(this) { res ->
+            if (res.status == true) {
                 progressDialog.dismiss()
                 val intent = Intent(applicationContext, SendOtpActivity::class.java)
                 startActivity(intent)
-            }else{
+            } else {
                 progressDialog.dismiss()
-                Toast.makeText(applicationContext,res.message,Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, res.message, Toast.LENGTH_LONG).show()
             }
-        })
+        }
     }
 }

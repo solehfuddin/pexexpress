@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+//        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
 
         edtEmail = findViewById(R.id.edt_email)
         edtPassword = findViewById(R.id.edt_password)

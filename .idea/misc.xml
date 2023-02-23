@@ -86,33 +86,58 @@
         <entry key="..\:/Users/genta/AndroidStudioProjects/PEX_Courier/app/src/main/res/layout/loading_alert.xml" value="0.209375" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/PEX_Courier/app/src/main/res/menu/navigation_menu.xml" value="0.18" />
         <entry key="..\:/Users/genta/AndroidStudioProjects/PEX_Courier/app/src/main/res/xml/network_config.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/card_active.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/card_button.xml" value="0.1625" />
+        <entry key="app/src/main/res/drawable/card_button_blue.xml" value="0.1545" />
+        <entry key="app/src/main/res/drawable/card_button_outline.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/card_inactive.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/card_spinner.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/ic_back_black.xml" value="0.144" />
+        <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.144" />
+        <entry key="app/src/main/res/drawable/ic_baseline_remove_orange_eye_24.xml" value="0.144" />
+        <entry key="app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.144" />
+        <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.144" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.14" />
+        <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1695" />
+        <entry key="app/src/main/res/drawable/rounded_button_purple.xml" value="0.105" />
         <entry key="app/src/main/res/drawable/rounded_shape.xml" value="0.103" />
+        <entry key="app/src/main/res/drawable/stroke_horizontal.xml" value="0.171" />
+        <entry key="app/src/main/res/drawable/stroke_line.xml" value="0.1695" />
+        <entry key="app/src/main/res/layout/activity_chang_password_activiy.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/activity_change_profile.xml" value="0.11979166666666667" />
         <entry key="app/src/main/res/layout/activity_detail_back_to_sender.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_detail_cancel_pickup.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_detail_finish_delivery.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_detail_payment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_pending_delivery.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_detail_pick_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_pick_up2.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_detail_release.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_detail_request_delivery.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_transit.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.182518115942029" />
         <entry key="app/src/main/res/layout/activity_logger.xml" value="0.21195652173913043" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.182518115942029" />
+        <entry key="app/src/main/res/layout/activity_new_password.xml" value="0.20108695652173914" />
+        <entry key="app/src/main/res/layout/activity_payment_success.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_payment_vaactivity.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_payment_wallet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_qrdelivery.xml" value="0.1609375" />
         <entry key="app/src/main/res/layout/activity_qrscanner.xml" value="0.15885416666666666" />
+        <entry key="app/src/main/res/layout/activity_send_otp.xml" value="0.1308876811594203" />
         <entry key="app/src/main/res/layout/app_bar.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout/card_cu_qr.xml" value="0.18795289855072464" />
+        <entry key="app/src/main/res/layout/card_paymentoption.xml" value="0.125" />
         <entry key="app/src/main/res/layout/card_pu.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/card_pu_custom.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/card_pu_custom.xml" value="0.375" />
         <entry key="app/src/main/res/layout/card_pu_delivery.xml" value="0.25" />
         <entry key="app/src/main/res/layout/card_pu_qr.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_title_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_detail_payment.xml" value="0.165" />
         <entry key="app/src/main/res/layout/dialog_image_picker.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_after_request_delivery.xml" value="0.24375" />
         <entry key="app/src/main/res/layout/fragment_cancel_for_pickup.xml" value="0.17980072463768115" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.13333333333333333" />
         <entry key="app/src/main/res/layout/fragment_p_u.xml" value="0.182518115942029" />
@@ -120,6 +145,7 @@
         <entry key="app/src/main/res/layout/fragment_pick_up_requst.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_request_delivery.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/input_form.xml" value="0.21195652173913043" />
+        <entry key="app/src/main/res/xml/file_path.xml" value="0.1" />
       </map>
     </option>
   </component>

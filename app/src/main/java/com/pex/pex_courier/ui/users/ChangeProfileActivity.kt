@@ -38,7 +38,7 @@ class ChangeProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_profile)
-        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+//        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
 
         sharedPreference = SystemDataLocal(applicationContext)
         token = sharedPreference!!.fetchToken()

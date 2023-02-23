@@ -56,6 +56,7 @@ class AfterRequestDeliveryFragment : Fragment(), CallbackClick {
         recyclerViewAdapter = context?.let { NewViewAdapter(it, activity = activity, this) }!!
         recylcerView.layoutManager = LinearLayoutManager(context)
         recylcerView.adapter = recyclerViewAdapter
+        recyclerViewAdapter.setTitle("Finish Delivery")
         provider =  ViewModelProvider(this, OrderViewModelFactory(OrderRepository(apiInterface))).get(
             OrderViewModel::class.java)
         sharedPreference = SystemDataLocal(requireContext())

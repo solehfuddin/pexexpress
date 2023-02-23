@@ -2,6 +2,7 @@ package com.pex.pex_courier.ui.transit
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,11 @@ class InTransitFragment : Fragment(), CallbackClick {
     private lateinit var ivNoData : ImageView
     private lateinit var tvNoData : TextView
     private var token:String? = null
+
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 5000
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,10 +87,25 @@ class InTransitFragment : Fragment(), CallbackClick {
     }
 
     override fun onResume() {
+//        super.onResume()
+//        limit = 5
+//        offset = 0
+//        readData(token!!,limit!!,offset!!)
+
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            limit = 5
+            offset = 0
+            readData(token!!,limit!!,offset!!)
+//            Toast.makeText(context, "Reload Pu", Toast.LENGTH_SHORT).show()
+        }.also { runnable = it }, delay.toLong())
+
         super.onResume()
-        limit = 5
-        offset = 0
-        readData(token!!,limit!!,offset!!)
+    }
+
+    override fun onPause() {
+        handler.removeCallbacks(runnable!!)
+        super.onPause()
     }
 
     private fun readData(token:String,limit:Int,offset:Int) {

@@ -13,6 +13,9 @@ import com.pex.pex_courier.repository.AuthRepository
 class AuthViewModel(private val authRepository: AuthRepository) :ViewModel() {
     fun auth( login: LoginModel): LiveData<LoginDTO> = authRepository.auth(login)
     fun requestOTP(requestOTPModel: com.pex.pex_courier.model.RequestOTPModel) = authRepository.requestOTP(requestOTPModel)
+    fun vaNotification(phone:String, bankName: String, totalBiaya: String, expDate:String, vaNumber:String) = authRepository.vaNotification(phone, bankName, totalBiaya, expDate, vaNumber)
+    fun ovoNotification(phone:String, channel: String, totalBiaya: String) = authRepository.ovoNotification(phone, channel, totalBiaya)
+    fun danalinkNotification(phone:String, channel: String, mobileLink:String, totalBiaya: String) = authRepository.danalinkNotification(phone, channel, mobileLink, totalBiaya)
     fun checkOTP(checkOTPModel: CheckOTPModel) = authRepository.checkOTP(checkOTPModel)
     fun updatePassword(updatePasswordModel: UpdatePasswordModel,token:String) = authRepository.updatePassword(updatePasswordModel,token)
 }

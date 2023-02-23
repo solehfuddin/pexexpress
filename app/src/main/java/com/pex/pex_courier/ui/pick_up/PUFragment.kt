@@ -2,6 +2,7 @@ package com.pex.pex_courier.ui.pick_up
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,10 @@ class PUFragment : Fragment() , CallbackInterface {
     private var total: Int? = 0
     lateinit var token : String
 
+    var handler: Handler = Handler()
+    var runnable: Runnable? = null
+    var delay = 5000
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +65,7 @@ class PUFragment : Fragment() , CallbackInterface {
         recyclerViewAdapter = context?.let { CustomViewAdapter(it, activity, true, this) }!!
         recylcerView.layoutManager = LinearLayoutManager(context)
         recylcerView.adapter = recyclerViewAdapter
+        recyclerViewAdapter.setTitle("Pickup")
         provider =  ViewModelProvider(this, OrderViewModelFactory(OrderRepository(apiInterface))).get(
             OrderViewModel::class.java)
         sharedPreference = SystemDataLocal(requireContext())
@@ -87,19 +93,26 @@ class PUFragment : Fragment() , CallbackInterface {
     }
 
     override fun onResume() {
+        handler.postDelayed(Runnable {
+            handler.postDelayed(runnable!!, delay.toLong())
+            limit = 5
+            offset = 0
+            if (orders.size > 0)
+            {
+                temp.clear()
+                tempOrder.clear()
+                orders.clear()
+            }
+
+            readData(token,limit!!,offset!!)
+        }.also { runnable = it }, delay.toLong())
+
         super.onResume()
-        limit = 5
-        offset = 0
-        if (orders.size > 0)
-        {
-            temp.clear()
-            tempOrder.clear()
-            orders.clear()
+    }
 
-            this.recyclerViewAdapter.removeAll()
-        }
-
-        readData(token,limit!!,offset!!)
+    override fun onPause() {
+        handler.removeCallbacks(runnable!!)
+        super.onPause()
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -117,7 +130,7 @@ class PUFragment : Fragment() , CallbackInterface {
 
                 recyclerViewAdapter.setDataListItems(tempOrder)
                 recyclerViewAdapter.setStatus("3")
-                recyclerViewAdapter.setTitle("")
+                recyclerViewAdapter.setTitle("Pickup")
 
                 if (res.data.size > 0)
                 {

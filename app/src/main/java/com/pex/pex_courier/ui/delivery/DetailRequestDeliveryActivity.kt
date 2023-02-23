@@ -121,13 +121,14 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerActivityCl
         data = intent.getParcelableExtra("order")
         pos = intent.getIntExtra("position", 0)
         val formatter: NumberFormat = DecimalFormat("#,###")
-        val myNumber = data?.biaya?.toInt()
+        val myNumber = data?.biaya ?: 0
         val formattedNumber: String = formatter.format(myNumber)
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"
         tvTime.text = data?.jampenugasandelivery.toString()
         tvDate.text = data?.tanggalpenugasandelivery.toString()
-        tvPengirim.text = data?.namapengirim.toString()
+//        tvPengirim.text = data?.namapengirim.toString()
+        tvPengirim.text = data?.namapenerima.toString()
         tvResi.text = data?.nomortracking.toString()
 
         cardPickImage = findViewById(R.id.card_pick_image)
@@ -153,11 +154,6 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerActivityCl
             }
             else
             {
-                if (spinnerStatus.selectedItem == "RETURNED TO SENDER")
-                {
-
-                }
-
                 showConfirmDialog(token,data?.idPengiriman)
             }
         }
@@ -212,7 +208,8 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerActivityCl
         val tvDialog = dialog.findViewById(R.id.tv_text_dialog) as TextView
         tvDialog.text = text
         yesBtn.setOnClickListener {
-            changeStatus(token,idPengiriman,status)
+//            changeStatus(token,idPengiriman,status)
+            updateStatus(token,idPengiriman)
         }
         noBtn.setOnClickListener { dialog.dismiss() }
         dialog.show()
@@ -324,12 +321,30 @@ class DetailRequestDeliveryActivity : AppCompatActivity(), ImagePickerActivityCl
                                 i: Int,
                                 l: Long
                             ) {
-                                if (spinnerStatus.selectedItem != "PENDING DELIVERY")
+                                if (spinnerStatus.selectedItem.equals("DELIVERED - PACKAGE RECEIVED BY"))
+                                {
+                                    inputReceiver.visibility = View.VISIBLE
+
+                                    val data = listStatus[i]
+                                    status = data.id.toString()
+
+                                    Log.d("Statusnya : ", status)
+                                }
+                                else if (spinnerStatus.selectedItem == "PENDING DELIVERY")
+                                {
+                                    status = "30"
+
+                                    Log.d("Statusnya : ", status)
+                                    inputReceiver.visibility = View.GONE
+                                }
+                                else
                                 {
                                     val data = listStatus[i]
                                     status = data.id.toString()
 
                                     Log.d("Statusnya : ", status)
+
+                                    inputReceiver.visibility = View.GONE
                                 }
                             }
 

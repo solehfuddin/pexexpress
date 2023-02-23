@@ -12,6 +12,9 @@ data class OrderDTO(
     @SerializedName("id_pegawai"              ) var idPegawai               : Int?    = null,
     @SerializedName("id"                      ) var id                      : Int?    = null,
     @SerializedName("nm_kurir"                ) var nm_kurir                : String? = "-",
+    @SerializedName("nama_kurir_shuttle"      ) var kurirShuttle            : String? = "-",
+    @SerializedName("nama_kurir_transit"      ) var kurirTransit            : String? = "-",
+    @SerializedName("nama_kurir_delivery"     ) var kurirDelivery           : String? = "-",
     @SerializedName("nomorpemesanan"          ) var nomorpemesanan          : String? = null,
     @SerializedName("nomortracking"           ) var nomortracking           : String? = null,
     @SerializedName("pelangganbaru"           ) var pelangganbaru           : String? = null,
@@ -45,7 +48,7 @@ data class OrderDTO(
     @SerializedName("lebar"                   ) var lebar                   : String? = null,
     @SerializedName("tinggi"                  ) var tinggi                  : String? = null,
     @SerializedName("berat"                   ) var berat                   : String? = null,
-    @SerializedName("biaya"                   ) var biaya                   : String? = null,
+    @SerializedName("biaya"                   ) var biaya                   : Int? = 0,
     @SerializedName("trdiskon"                ) var trdiskon                : Int?    = null,
     @SerializedName("iddiskon"                ) var iddiskon                : String? = null,
     @SerializedName("jenispembayaran"         ) var jenispembayaran         : Int?    = null,
@@ -105,6 +108,7 @@ data class OrderDTO(
     @SerializedName("statusdelivery"          ) var statusdelivery          : Int?    = 0,
     @SerializedName("kodeasuransi"            ) var kodeasuransi            : String? = null,
     @SerializedName("biayaasuransi"           ) var biayaasuransi           : Int?    = 0,
-
+    @SerializedName("status"                  ) var statusPembayaran        : String? = "-",
+    @SerializedName("status_payment_kurir"    ) var statusPembayaranKurir   : String? = null,
 
 ) : Parcelable

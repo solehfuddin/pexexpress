@@ -75,7 +75,7 @@ class DetailBackToSenderActivity : AppCompatActivity() {
         edtNote = findViewById(R.id.edt_note)
         val data: OrderDTO? = intent.getParcelableExtra("order")
         val formatter: NumberFormat = DecimalFormat("#,###")
-        val myNumber = data?.biaya?.toInt()
+        val myNumber = data?.biaya ?: 0
         val formattedNumber: String = formatter.format(myNumber)
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"

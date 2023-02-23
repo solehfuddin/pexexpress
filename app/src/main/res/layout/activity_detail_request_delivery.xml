@@ -150,7 +150,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include layout="@layout/input_form" android:id="@+id/receiver_input"/>
+            <include layout="@layout/input_form"
+                android:id="@+id/receiver_input"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -277,7 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_activity"
                 android:layout_marginTop="@dimen/margin_small"
-                android:text="Delivery"
+                android:text="Update Status"
                 android:id="@+id/btn_delivery"
                 />
             <com.google.android.material.button.MaterialButton
@@ -293,8 +294,6 @@
                 app:backgroundTint="@null"
                 android:layout_marginBottom="@dimen/margin_activity"
                 />
-
-           
 
         </LinearLayout>
     </ScrollView>

@@ -69,7 +69,7 @@ class DetailPendingDeliveryActivity : AppCompatActivity() {
         toolbarTitle2.text = "Pending"
 
         val formatter: NumberFormat = DecimalFormat("#,###")
-        val myNumber = data?.biaya?.toInt()
+        val myNumber = data?.biaya ?: 0
         val formattedNumber: String = formatter.format(myNumber)
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"

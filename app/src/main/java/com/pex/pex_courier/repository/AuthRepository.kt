@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.pex.pex_courier.dto.GlobalResponse
+import com.pex.pex_courier.dto.OtpResponse
 import com.pex.pex_courier.dto.forgetpassword.CheckOTPDTO
 import com.pex.pex_courier.dto.login.LoginDTO
 import com.pex.pex_courier.model.CheckOTPModel
@@ -35,23 +36,98 @@ class AuthRepository(private val apiInterface:ApiInterface) {
         return loginResponse
     }
 
-    fun requestOTP(requestOTP:RequestOTPModel) :LiveData<GlobalResponse>{
-        val requestOTPResponse = MutableLiveData<GlobalResponse>()
+    fun requestOTP(requestOTP:RequestOTPModel) :LiveData<OtpResponse>{
+        val requestOTPResponse = MutableLiveData<OtpResponse>()
         val errorResponse = MutableLiveData<String>()
         val gson  = Gson()
-        apiInterface.requestOTP(requestOTP.phone).enqueue(object:Callback<GlobalResponse>{
+        apiInterface.requestOTP(requestOTP.phone).enqueue(object:Callback<OtpResponse>{
             override fun onResponse(
-                call: Call<GlobalResponse>,
-                response: Response<GlobalResponse>
+                call: Call<OtpResponse>,
+                response: Response<OtpResponse>
             ) {
                 if(response.code() == 200){
                     requestOTPResponse.value = response.body()
                 }else{
-                    requestOTPResponse.value = gson.fromJson(response.errorBody()?.string(),GlobalResponse::class.java)
+                    requestOTPResponse.value = gson.fromJson(response.errorBody()?.string(),OtpResponse::class.java)
                 }
             }
 
-            override fun onFailure(call: Call<GlobalResponse>, t: Throwable) {
+            override fun onFailure(call: Call<OtpResponse>, t: Throwable) {
+                errorResponse.value = t.message
+            }
+
+        })
+        return requestOTPResponse
+    }
+
+    fun vaNotification(phone:String, bankName: String, totalBiaya: String, expDate:String, vaNumber:String) :LiveData<OtpResponse>{
+        val requestOTPResponse = MutableLiveData<OtpResponse>()
+        val errorResponse = MutableLiveData<String>()
+        val gson  = Gson()
+        apiInterface.vaNotification(phone, bankName, totalBiaya, expDate, vaNumber).enqueue(object:Callback<OtpResponse>{
+            override fun onResponse(
+                call: Call<OtpResponse>,
+                response: Response<OtpResponse>
+            ) {
+                if(response.code() == 200){
+                    requestOTPResponse.value = response.body()
+                }else{
+                    requestOTPResponse.value = response.body()
+//                    requestOTPResponse.value = gson.fromJson(response.errorBody()?.string(),OtpResponse::class.java)
+                }
+            }
+
+            override fun onFailure(call: Call<OtpResponse>, t: Throwable) {
+                errorResponse.value = t.message
+            }
+
+        })
+        return requestOTPResponse
+    }
+
+    fun ovoNotification(phone:String, channel: String, totalBiaya: String) :LiveData<OtpResponse>{
+        val requestOTPResponse = MutableLiveData<OtpResponse>()
+        val errorResponse = MutableLiveData<String>()
+        val gson  = Gson()
+        apiInterface.ovoNotification(phone, channel, totalBiaya).enqueue(object:Callback<OtpResponse>{
+            override fun onResponse(
+                call: Call<OtpResponse>,
+                response: Response<OtpResponse>
+            ) {
+                if(response.code() == 200){
+                    requestOTPResponse.value = response.body()
+                }else{
+                    requestOTPResponse.value = response.body()
+//                    requestOTPResponse.value = gson.fromJson(response.errorBody()?.string(),OtpResponse::class.java)
+                }
+            }
+
+            override fun onFailure(call: Call<OtpResponse>, t: Throwable) {
+                errorResponse.value = t.message
+            }
+
+        })
+        return requestOTPResponse
+    }
+
+    fun danalinkNotification(phone:String, channel: String, mobileLink:String, totalBiaya: String) :LiveData<OtpResponse>{
+        val requestOTPResponse = MutableLiveData<OtpResponse>()
+        val errorResponse = MutableLiveData<String>()
+        val gson  = Gson()
+        apiInterface.danalinkNotification(phone, channel, mobileLink, totalBiaya).enqueue(object:Callback<OtpResponse>{
+            override fun onResponse(
+                call: Call<OtpResponse>,
+                response: Response<OtpResponse>
+            ) {
+                if(response.code() == 200){
+                    requestOTPResponse.value = response.body()
+                }else{
+                    requestOTPResponse.value = response.body()
+//                    requestOTPResponse.value = gson.fromJson(response.errorBody()?.string(),OtpResponse::class.java)
+                }
+            }
+
+            override fun onFailure(call: Call<OtpResponse>, t: Throwable) {
                 errorResponse.value = t.message
             }
 

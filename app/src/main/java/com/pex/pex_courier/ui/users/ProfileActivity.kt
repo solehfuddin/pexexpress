@@ -34,7 +34,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
+//        Thread.setDefaultUncaughtExceptionHandler(ForceCloseHandler(this))
 
         changePassword = findViewById(R.id.cardPassword)
         changeProfile = findViewById(R.id.changeProfile)

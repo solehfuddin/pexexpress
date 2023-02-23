@@ -49,7 +49,7 @@ class DetailFinishDeliveryActivity : AppCompatActivity() {
         imageReceived = findViewById(R.id.imageReceived)
 //        btnResi = findViewById(R.id.printResi)
         setSupportActionBar(toolbar)
-        toolbarTitle2.text = "Finish Delivery"
+        toolbarTitle2.text = intent.getStringExtra("title")
         supportActionBar?.setDisplayShowTitleEnabled(false)
         helloTitle.visibility = View.GONE
         nameTitle.visibility = View.GONE
@@ -78,12 +78,13 @@ class DetailFinishDeliveryActivity : AppCompatActivity() {
         edtNote = findViewById(R.id.edt_note)
         val data: OrderDTO? = intent.getParcelableExtra("order")
         val formatter: NumberFormat = DecimalFormat("#,###")
-        val myNumber = data?.biaya?.toInt()
+        val myNumber = data?.biaya ?: 0
         val formattedNumber: String = formatter.format(myNumber)
         tvLayanan.text = data?.layanan.toString()
         tvTarif.text = "Rp $formattedNumber"
         tvResi.text = data?.nomortracking.toString()
-        tvPengirim.text = data?.namapengirim.toString()
+//        tvPengirim.text = data?.namapengirim.toString()
+        tvPengirim.text = data?.namapenerima.toString()
         tvTime.text = data?.jamdelivery.toString()
         tvDate.text = data?.tanggaldelivery.toString()
         edtStatusPickup.setText(data?.statusPengiriman.toString())

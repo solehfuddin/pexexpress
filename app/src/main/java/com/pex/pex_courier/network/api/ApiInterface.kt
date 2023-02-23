@@ -1,12 +1,14 @@
 package com.pex.pex_courier.network.api
 
 import com.pex.pex_courier.dto.GlobalResponse
+import com.pex.pex_courier.dto.OtpResponse
 import com.pex.pex_courier.dto.asuransi.AsuransiResponse
 import com.pex.pex_courier.dto.dashboard.DashboardDTO
 import com.pex.pex_courier.dto.forgetpassword.CheckOTPDTO
 import com.pex.pex_courier.dto.login.LoginDTO
 import com.pex.pex_courier.dto.order.OrderResponse
 import com.pex.pex_courier.dto.order.StatusDeliveryDTO
+import com.pex.pex_courier.dto.payment.*
 import com.pex.pex_courier.dto.ukuran.UkuranResponse
 import com.pex.pex_courier.dto.users.ResponseProfile
 import com.pex.pex_courier.helper.Helper
@@ -23,7 +25,6 @@ import java.util.concurrent.TimeUnit
 
 
 interface ApiInterface {
-
 
     @FormUrlEncoded
     @POST("courier/auth")
@@ -61,7 +62,28 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @POST("courier/sendotp")
-    fun requestOTP(@Field("phone")phone:String):Call<GlobalResponse>
+    fun requestOTP(@Field("phone")phone:String):Call<OtpResponse>
+
+    @FormUrlEncoded
+    @POST("courier/sendnotifva")
+    fun vaNotification(@Field("phone")phone:String,
+                       @Field("bankName")bankName:String,
+                       @Field("totalbiaya")totalbiaya:String,
+                       @Field("expDate")expDate:String,
+                       @Field("vaNumber")vaNumber:String):Call<OtpResponse>
+
+    @FormUrlEncoded
+    @POST("courier/sendnotifovo")
+    fun ovoNotification(@Field("phone")phone:String,
+                        @Field("channel")bankName:String,
+                        @Field("totalbiaya")totalbiaya:String):Call<OtpResponse>
+
+    @FormUrlEncoded
+    @POST("courier/sendnotifdanalink")
+    fun danalinkNotification(@Field("phone")phone:String,
+                             @Field("channel")bankName:String,
+                             @Field("mobileLink")mobileLink:String,
+                             @Field("totalbiaya")totalbiaya:String):Call<OtpResponse>
 
     @FormUrlEncoded
     @POST("courier/forget-password")
@@ -70,7 +92,6 @@ interface ApiInterface {
     @FormUrlEncoded
     @POST("courier/update-password")
     fun updatePassword(@Header("Authorization")token:String,@Field("new_password")newPassword: String,@Field("confirm_new_password")newConfirmPassword:String) :Call<GlobalResponse>
-
 
     @FormUrlEncoded
     @Multipart
@@ -107,9 +128,70 @@ interface ApiInterface {
                        @Part("catatan")catatan:RequestBody?,
                        @Path("id")id:Int?):Call<GlobalResponse>
 
+    @FormUrlEncoded
+    @POST("courier/order/update-payment/{id}")
+    fun updatePayment(@Header("Authorization")token:String,
+                       @Field("laststatus") lastStatus:String?,
+                       @Field("tagihan_awal") tagihanAwal:Int?,
+                       @Field("tagihan") totalTagihan:Int?,
+                       @Field("idukuran") idUkuran:Int?,
+                       @Field("panjang") panjang:String?,
+                       @Field("lebar") lebar:String?,
+                       @Field("tinggi") tinggi:String?,
+                       @Field("berat") berat:String?,
+                       @Field("biaya") biaya:Int?,
+                       @Field("biayaasuransi") biayaasuransi:Int?,
+                       @Path("id")id:String?):Call<PaymentResponseDTO>
+
+    @FormUrlEncoded
+    @POST("courier/order/update-payment-master/{id}")
+    fun updatePaymentMaster(@Header("Authorization")token:String,
+                      @Field("laststatus") lastStatus:String?,
+                      @Field("tagihan_awal") tagihanAwal:Int?,
+                      @Field("tagihan") totalTagihan:Int?,
+                      @Field("idukuran") idUkuran:Int?,
+                      @Field("panjang") panjang:String?,
+                      @Field("lebar") lebar:String?,
+                      @Field("tinggi") tinggi:String?,
+                      @Field("berat") berat:String?,
+                      @Field("biaya") biaya:Int?,
+                      @Field("biayaasuransi") biayaasuransi:Int?,
+                      @Field("idjenispembayaran") idjenispembayaran: Int?,
+                      @Path("id")id:String?):Call<PaymentResponseDTO>
+
+    @POST("courier/order/update-payment-courier/{id}")
+    fun updatePaymentCourier(@Header("Authorization")token:String,
+                      @Path("id")id:String?):Call<GlobalResponse>
+
     @GET("courier/order/get-status/Delivery")
     fun getStatusDelivery(@Header("Authorization")token: String):Call<StatusDeliveryDTO>
 
+//    @GET("payments/check/{no_invoice}")
+//    fun getStatusPayment(@Path("no_invoice") nomorInvoice: String):Call<GlobalResponse>
+
+    @GET("payments/checkMobile/{no_invoice}")
+    fun getStatusPayment(@Path("no_invoice") nomorInvoice: String):Call<PaymentResponseDTO>
+
+    @GET("courier/order/bank-option")
+    fun getVaOption(@Header("Authorization")token: String):Call<PaymentvaoptionResponseDTO>
+
+    @GET("courier/order/wallet-option")
+    fun getWalletOption(@Header("Authorization")token: String):Call<PaymentwalletoptionResponseDTO>
+
+    @FormUrlEncoded
+    @POST("payments/va/create")
+    fun updatePaymentva(@Field("no_invoice") nomorInvoice:String?,
+                      @Field("bank") bankName:String?,
+                      @Field("name") customerName:String?,
+                      @Field("amount") amount:Int?):Call<PaymentvaResponseDTO>
+
+    @FormUrlEncoded
+    @POST("payments/ewallet")
+    fun updatePaymentwallet(@Field("no_invoice") nomorInvoice:String?,
+                        @Field("channel") channel:String?,
+                        @Field("name") customerName:String?,
+                        @Field("amount") amount:Int?,
+                        @Field("mobile_number") nohp: String?):Call<PaymentwalletResponseDTO>
 
 //    @Multipart
 //    @POST("profile/changePicture")
